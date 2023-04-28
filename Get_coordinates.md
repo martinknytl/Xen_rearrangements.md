@@ -17,4 +17,9 @@ grep 'gprin3\|ugt8\|pitx2\|metap1\|ccrn4l\|spry1\|smad1\|ednra\|hand2\|kit\|fgfr
 ```
 
 * for XB
+Make multifasta file with X. trop seqs for all genes
 
+Then blast this against the Xborealis genome:
+```
+blastn -query test.fa -db Xbo.v1_chrs_and_concatscafs_blastable -outfmt 6 -out test.out
+```
