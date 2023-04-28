@@ -1,5 +1,10 @@
 # Get coordinates from gff3 file:
 
+Working in this directory on graham:
+```
+/home/ben/projects/rrg-ben/for_martin
+```
+
 
 * for XL
 ```
