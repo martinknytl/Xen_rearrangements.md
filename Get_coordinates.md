@@ -16,40 +16,59 @@ cut -f1,4,5,9 XENTR_10.0_Xenbase_longest_CDSonly.gff3 > XENTR_10.0_Xenbase_longe
 cut -f1,4,5,9 XENLA_10.1_Xenbase_longest_CDSonly.gff > XENLA_10.1_Xenbase_longest_CDSonly_names.bed
 ```
 
-Remove CDS that are less than 200 bp
+Remove CDS that are less than 200 bp for XL
 ```
 awk '{ $5 = $3 - $2 } 1' < XENLA_10.1_Xenbase_longest_CDSonly_names.bed > XENLA_10.1_Xenbase_longest_CDSonly_names_diff.bed
 awk '$5 >= 200' XENLA_10.1_Xenbase_longest_CDSonly_names_diff.bed > XENLA_10.1_Xenbase_longest_CDSonly_names_diff_gt200.bed
 ```
-Now replace the spaces that awk added with tabs so that bedtools can read it:
+and XT:
+```
+awk '{ $5 = $3 - $2 } 1' < XENTR_10.0_Xenbase_longest_CDSonly_names.bed > XENTR_10.0_Xenbase_longest_CDSonly_names_diff.bed
+awk '$5 >= 200' XENTR_10.0_Xenbase_longest_CDSonly_names_diff.bed > XENTR_10.0_Xenbase_longest_CDSonly_names_diff_gt200.bed
+```
+Now replace the spaces that awk added with tabs so that bedtools can read it for XL:
 ```
 awk -v OFS="\t" '{$1=$1; print}' XENLA_10.1_Xenbase_longest_CDSonly_names_diff_gt200.bed > XENLA_10.1_Xenbase_longest_CDSonly_names_diff_gt200tab.bed
 ```
-Now cut the first four columns
+and XT:
+```
+awk -v OFS="\t" '{$1=$1; print}' XENTR_10.0_Xenbase_longest_CDSonly_names_diff_gt200.bed > XENTR_10.0_Xenbase_longest_CDSonly_names_diff_gt200tab.bed
+```
+Now cut the first four columns for XL
 ```
 cut -f1,2,3,4 XENLA_10.1_Xenbase_longest_CDSonly_names_diff_gt200tab.bed > XENLA_10.1_Xenbase_longest_CDSonly_names_diff_gt200tab_final.bed
 ```
+and XT:
+```
+cut -f1,2,3,4 XENTR_10.0_Xenbase_longest_CDSonly_names_diff_gt200tab.bed > XENTR_10.0_Xenbase_longest_CDSonly_names_diff_gt200tab_final.bed
 
-Now use the XL data to extract fasta seqs for each exon:
+```
+Now use the XL bed to extract fasta seqs for each exon from the XL genome:
 ```
 module load bedtools
 bedtools getfasta -name -fi ../2021_XL_v10_refgenome/XENLA_10.1_genome.fa -bed XENLA_10.1_Xenbase_longest_CDSonly_names_diff_gt200tab_final.bed -fo XENLA_10.1_Xenbase_longest_CDSonly_names_gt200.fasta
 ```
+And now use the XT bed to extract fasta seqs for each exon from the XT genome:
+```
+module load bedtools
+bedtools getfasta -name -fi ../2020_XT_v10_refgenome/XENTR_10.0_genome.fasta -bed XENTR_10.0_Xenbase_longest_CDSonly_names_diff_gt200tab_final.bed -fo XENTR_10.0_Xenbase_longest_CDSonly_names_gt200.fasta
+```
 
-Get best alignment of blast results (based on bit score)
+Get best alignment between XL CDS and XB genome using blast (based on bit score)
 ```
 module load nixpkgs/16.09 gcc/7.3.0 'blast+/2.10.1' 
 blastn -query XENLA_10.1_Xenbase_longest_CDSonly_names_gt200.fasta -db ../XB_genome_concat_scafs/Xbo.v1_chrs_and_concatscafs_blastable -outfmt 6 | sort -k1,1 -k12,12nr -k11,11n | sort -u -k1,1 --merge > XLlongCDS_to_XBgenome_bestbitscore.blastn
 ```
+
 Use sed to replace double colon with a tab so that the XL coordinates are in a separate column:
 ```
 sed -i 's/\:\:/    /g' XLlongCDS_to_XBgenome_bestbitscore.blastn
 ```
 Now get this column plus the borealis coordinates, plus the direction info
 ```
-cut -f1,2,3,10,11 XLlongCDS_to_XBgenome_bestbitscore.blastn > XLlongCDS_to_XBgenome.data
+cut -f1,2,3,10,11 XLlongCDS_to_XBgenome_bestbitscore.blastn > XLlongCDS_to_XBgenome.txt
 ```
-
+*** the XLlongCDS_to_XBgenome.txt file has the coordinates for each XL CDS gt 200 bp and the XB genome and also the XL annotation information
 
 # Get coordinates from XL L and S subgenoms that match XT CDS gt 200 bp
 
@@ -103,6 +122,21 @@ makeblastdb -in XENLA_10.1_genome_Ssubgenomeonly.fa -dbtype nucl -out XENLA_10.1
 omeonly_blastable
 ```
 If the script is called "2023_makeblastdb.sh" then it can be executed like this: "sbatch 2023_makeblastdb.sh"
+
+
+
+Get best alignment between XT CDS and XL L-subgenome using blast (based on bit score)
+```
+module load nixpkgs/16.09 gcc/7.3.0 'blast+/2.10.1' 
+blastn -query XENTR_10.0_Xenbase_longest_CDSonly_names_gt200.fasta -db ../2021_XL_v10_refgenome/XENLA_10.1_genome_Lsubgenomeonly_blastable -outfmt 6 | sort -k1,1 -k12,12nr -k11,11n | sort -u -k1,1 --merge > XTlongCDS_to_XL_Lsubgenome_bestbitscore.blastn
+```
+Get best alignment between XT CDS and XL S-subgenome using blast (based on bit score)
+```
+module load nixpkgs/16.09 gcc/7.3.0 'blast+/2.10.1' 
+blastn -query XENTR_10.0_Xenbase_longest_CDSonly_names_gt200.fasta -db ../2021_XL_v10_refgenome/XENLA_10.1_genome_Ssubgenomeonly_blastable -outfmt 6 | sort -k1,1 -k12,12nr -k11,11n | sort -u -k1,1 --merge > XTlongCDS_to_XL_Ssubgenome_bestbitscore.blastn
+```
+
+
 
 
 ### below not used
