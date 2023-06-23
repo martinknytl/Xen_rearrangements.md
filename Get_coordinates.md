@@ -25,10 +25,15 @@ Now replace the spaces that awk added with tabs so that bedtools can read it:
 ```
 awk -v OFS="\t" '{$1=$1; print}' XENLA_10.1_Xenbase_longest_CDSonly_names_diff_gt200.bed > XENLA_10.1_Xenbase_longest_CDSonly_names_diff_gt200tab.bed
 ```
+Now cut the first four columns
+```
+cut -f1,2,3,4 XENLA_10.1_Xenbase_longest_CDSonly_names_diff_gt200tab.bed > XENLA_10.1_Xenbase_longest_CDSonly_names_diff_gt200tab_final.bed
+```
+
 Now use the XL data to extract fasta seqs for each exon:
 ```
 module load bedtools
-bedtools getfasta -name -fi ../2021_XL_v10_refgenome/XENLA_10.1_genome.fa -bed XENLA_10.1_Xenbase_longest_CDSonly_names_diff_gt200tab.bed -fo XENLA_10.1_Xenbase_longest_CDSonly_names_gt200.fasta
+bedtools getfasta -name -fi ../2021_XL_v10_refgenome/XENLA_10.1_genome.fa -bed XENLA_10.1_Xenbase_longest_CDSonly_names_diff_gt200tab_final.bed -fo XENLA_10.1_Xenbase_longest_CDSonly_names_gt200.fasta
 ```
 
 
