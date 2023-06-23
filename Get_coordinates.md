@@ -59,7 +59,6 @@ Get best alignment between XL CDS and XB genome using blast (based on bit score)
 module load nixpkgs/16.09 gcc/7.3.0 'blast+/2.10.1' 
 blastn -query XENLA_10.1_Xenbase_longest_CDSonly_names_gt200.fasta -db ../XB_genome_concat_scafs/Xbo.v1_chrs_and_concatscafs_blastable -outfmt 6 | sort -k1,1 -k12,12nr -k11,11n | sort -u -k1,1 --merge > XLlongCDS_to_XBgenome_bestbitscore.blastn
 ```
-
 Use sed to replace double colon with a tab so that the XL coordinates are in a separate column:
 ```
 sed -i 's/\:\:/    /g' XLlongCDS_to_XBgenome_bestbitscore.blastn
@@ -136,6 +135,17 @@ module load nixpkgs/16.09 gcc/7.3.0 'blast+/2.10.1'
 blastn -query XENTR_10.0_Xenbase_longest_CDSonly_names_gt200.fasta -db ../2021_XL_v10_refgenome/XENLA_10.1_genome_Ssubgenomeonly_blastable -outfmt 6 | sort -k1,1 -k12,12nr -k11,11n | sort -u -k1,1 --merge > XTlongCDS_to_XL_Ssubgenome_bestbitscore.blastn
 ```
 
+Use sed to replace double colon with a tab so that the XT coordinates are in a separate column:
+```
+sed -i 's/\:\:/    /g' XTlongCDS_to_XL_Lsubgenome_bestbitscore.blastn
+sed -i 's/\:\:/    /g' XTlongCDS_to_XL_Ssubgenome_bestbitscore.blastn
+```
+Now get this column plus the XL coordinates
+```
+cut -f1,2,3,10,11 XTlongCDS_to_XL_Lsubgenome_bestbitscore.blastn > XTlongCDS_to_XL_Lgenome.txt
+cut -f1,2,3,10,11 XTlongCDS_to_XL_Ssubgenome_bestbitscore.blastn > XTlongCDS_to_XL_Sgenome.txt
+```
+*** the XTlongCDS_to_XL_Lgenome.txt and the XTlongCDS_to_XL_Sgenome.txt files have the coordinates for each XT CDS gt 200 bp and each XL subgenome and also the XT annotation information
 
 
 
