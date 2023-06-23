@@ -41,6 +41,15 @@ Get best alignment of blast results (based on bit score)
 module load nixpkgs/16.09 gcc/7.3.0 'blast+/2.10.1' 
 blastn -query XENLA_10.1_Xenbase_longest_CDSonly_names_gt200.fasta -db ../XB_genome_concat_scafs/Xbo.v1_chrs_and_concatscafs_blastable -outfmt 6 | sort -k1,1 -k12,12nr -k11,11n | sort -u -k1,1 --merge > XLlongCDS_to_XBgenome_bestbitscore.blastn
 ```
+Use sed to replace double colon with a tab so that the XL coordinates are in a separate column:
+```
+sed -i 's/\:\:/    /g' XLlongCDS_to_XBgenome_bestbitscore.blastn
+```
+Now get this column plus the borealis coordinates, plus the direction info
+```
+cut -f1,2,3,10,11 XLlongCDS_to_XBgenome_bestbitscore.blastn > XLlongCDS_to_XBgenome.data
+```
+
 
 # Get coordinates from XL L and S subgenoms that match XT CDS gt 200 bp
 
