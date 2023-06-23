@@ -1,4 +1,4 @@
-# Get coordinates from gff3 file:
+# Get coordinates from XB genome that match XL CDS that are greater than 200:
 
 Working in this directory on graham:
 ```
@@ -40,6 +40,38 @@ Get best alignment of blast results (based on bit score)
 ```
 module load nixpkgs/16.09 gcc/7.3.0 'blast+/2.10.1' 
 blastn -query XENLA_10.1_Xenbase_longest_CDSonly_names_gt200.fasta -db ../XB_genome_concat_scafs/Xbo.v1_chrs_and_concatscafs_blastable -outfmt 6 | sort -k1,1 -k12,12nr -k11,11n | sort -u -k1,1 --merge > XLlongCDS_to_XBgenome_bestbitscore.blastn
+```
+
+# Get coordinates from XL L and S subgenoms that match XT CDS gt 200 bp
+
+First generate a XL genome with only the L (or S) subgenome
+```
+bedtools getfasta -fi XENLA_10.1_genome.fa -bed XL_Lsubgenome.bed -fo XENLA_10.1_genome_Lsubgenomeonly.fa
+bedtools getfasta -fi XENLA_10.1_genome.fa -bed XL_Ssubgenome.bed -fo XENLA_10.1_genome_Ssubgenomeonly.fa
+```
+using these bed files:
+```
+Chr1L	1	233740091
+Chr2L	1	191000147
+Chr3L	1	161426102
+Chr4L	1	155250555
+Chr5L	1	171415385
+Chr6L	1	164223596
+Chr7L	1	139837619
+Chr8L	1	135449134
+Chr9_10L	1	137811820
+```
+and
+```
+Chr1S	1	202412971
+Chr2S	1	169306101
+Chr3S	1	131962817
+Chr4S	1	132731175
+Chr5S	1	143394104
+Chr6S	1	137316287
+Chr7S	1	113060390
+Chr8S	1	103977863
+Chr9_10S	1	117266292
 ```
 
 ### below not used
