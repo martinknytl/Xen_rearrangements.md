@@ -74,6 +74,28 @@ Chr8S	1	103977863
 Chr9_10S	1	117266292
 ```
 
+Make a blast db for each subgenome.  This required a sbatch script:
+```
+#!/bin/sh 
+#SBATCH --job-name=blast
+#SBATCH --nodes=1 
+#SBATCH --cpus-per-task=1
+#SBATCH --time=8:00:00 
+#SBATCH --mem=64gb
+#SBATCH --output=blast.%J.out
+#SBATCH --error=blast.%J.err
+#SBATCH --account=def-ben
+
+module load nixpkgs/16.09 gcc/7.3.0 blast+/2.10.1
+makeblastdb -in XENLA_10.1_genome_Lsubgenomeonly.fa -dbtype nucl -out XENLA_10.1_genome_Lsubgen
+omeonly_blastable
+
+makeblastdb -in XENLA_10.1_genome_Ssubgenomeonly.fa -dbtype nucl -out XENLA_10.1_genome_Ssubgen
+omeonly_blastable
+```
+If the script is called "2023_makeblastdb.sh" then it can be executed like this: "sbatch 2023_makeblastdb.sh"
+
+
 ### below not used
 
 
