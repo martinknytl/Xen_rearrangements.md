@@ -7,8 +7,8 @@ Working in this directory on graham:
 
 First extract exons from trop and laevis longest gff file:
 ```
-grep 'CDS  ' XENTR_10.0_Xenbase_longest.gff3 > XENTR_10.0_Xenbase_longest_CDSonly.gff3
-grep 'CDS  ' XENLA_10.1_Xenbase_longest.gff3 > XENLA_10.1_Xenbase_longest_CDSonly.gff
+grep 'CDS' XENTR_10.0_Xenbase_longest.gff3 > XENTR_10.0_Xenbase_longest_CDSonly.gff3
+grep 'CDS' XENLA_10.1_Xenbase_longest.gff3 > XENLA_10.1_Xenbase_longest_CDSonly.gff
 ```
 Now make a new bed file that also has the name of each exon in it:
 ```
