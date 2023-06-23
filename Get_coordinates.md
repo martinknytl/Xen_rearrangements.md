@@ -12,13 +12,19 @@ grep 'CDS  ' XENLA_10.1_Xenbase_longest.gff3 > XENLA_10.1_Xenbase_longest_CDSonl
 ```
 Now make a new bed file that also has the name of each exon in it:
 ```
-cut -f1,4,5,9 XENTR_10.0_Xenbase_longest_CDSonly.gff3 > XENTR_10.0_Xenbase_longest_CDSonly_names.gff
-cut -f1,4,5,9 XENLA_10.1_Xenbase_longest_CDSonly.gff > XENLA_10.1_Xenbase_longest_CDSonly_names.gff
+cut -f1,4,5,9 XENTR_10.0_Xenbase_longest_CDSonly.gff3 > XENTR_10.0_Xenbase_longest_CDSonly_names.bed
+cut -f1,4,5,9 XENLA_10.1_Xenbase_longest_CDSonly.gff > XENLA_10.1_Xenbase_longest_CDSonly_names.bed
 ```
-Now use this to extract fasta seqs for each exon:
+
+Remove CDS that are less than 200 bp
+```
+awk '{ $5 = $3 - $2 } 1' < XENTR_10.0_Xenbase_longest_CDSonly_names.bed > XENTR_10.0_Xenbase_longest_CDSonly_names_diff.bed
+```
+
+Now use the XL data to extract fasta seqs for each exon:
 ```
 module load bedtools
-bedtools getfasta -name -fi XENTR_10.0_genome.fasta -bed XENTR_10.0_Xenbase_longest_exonsonly_names.gff -fo XENTR_10.0_genome_exonsonly.fasta
+bedtools getfasta -name -fi ../2021_XL_v10_refgenome/XENLA_10.1_genome.fa -bed XENLA_10.1_Xenbase_longest_CDSonly_names.bed -fo XENLA_10.1_Xenbase_longest_CDSonly_names.fasta
 ```
 
 
