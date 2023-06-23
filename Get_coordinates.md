@@ -5,13 +5,15 @@ Working in this directory on graham:
 /home/ben/projects/rrg-ben/for_martin
 ```
 
-First extract exons from trop gff file:
+First extract exons from trop and laevis longest gff file:
 ```
-grep 'exon' XENTR_10.0_Xenbase_longest.gff3 > XENTR_10.0_Xenbase_longest_exonsonly.gff3
+grep 'CDS  ' XENTR_10.0_Xenbase_longest.gff3 > XENTR_10.0_Xenbase_longest_CDSonly.gff3
+grep 'CDS  ' XENLA_10.1_Xenbase_longest.gff3 > XENLA_10.1_Xenbase_longest_CDSonly.gff
 ```
 Now make a new bed file that also has the name of each exon in it:
 ```
-cut -f1,4,5,9 XENTR_10.0_Xenbase_longest_exonsonly.gff3 > XENTR_10.0_Xenbase_longest_exonsonly_names.gff
+cut -f1,4,5,9 XENTR_10.0_Xenbase_longest_CDSonly.gff3 > XENTR_10.0_Xenbase_longest_CDSonly_names.gff
+cut -f1,4,5,9 XENLA_10.1_Xenbase_longest_CDSonly.gff > XENLA_10.1_Xenbase_longest_CDSonly_names.gff
 ```
 Now use this to extract fasta seqs for each exon:
 ```
