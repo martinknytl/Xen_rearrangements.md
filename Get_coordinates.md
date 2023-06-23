@@ -176,6 +176,33 @@ cut -f1,2,3,10,11 XTlongCDS_to_XL_Ssubgenome_bestbitscore.blastn > XTlongCDS_to_
 
 
 
+# Extracting XB L and S subgenomes
+bed file for L subgenome:
+```
+Chr1L   1       232529967
+Chr2L   1       184566229
+Chr3L   1       145564449
+Chr4L   1       156120765
+Chr5L   1       174499024
+Chr6L   1       157843502
+Chr7L   1       136892544
+Chr8L   1       123836259
+Chr9_10L        1       135078614
+```
+bed file for S subgenome:
+```
+Chr1S   1	196169796
+Chr2S   1	167897111
+Chr3S   1	127416162
+Chr4S   1	131359388
+Chr5S   1	139053354
+Chr6S   1	137668413
+Chr7S   1	105895006
+Chr8S   1	105436522
+Chr9_10S        1	110702964
+```
+
+
 ### below not used
 
 
