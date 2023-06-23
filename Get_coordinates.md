@@ -23,3 +23,9 @@ Then blast this against the Xborealis genome:
 ```
 blastn -query test.fa -db Xbo.v1_chrs_and_concatscafs_blastable -outfmt 6 -out test.out
 ```
+
+Get best alignment of blast results (based on bit score)
+
+module load nixpkgs/16.09 gcc/7.3.0 blast+/2.10.1 
+blastn -query test.fasta -db Xbo.v1_chrs_and_concatscafs_blastable -outfmt 6 | sort -k1,1 -k12,12nr -k11,11n | sort -u -k1,1 --merge > out_test.blastn
+
