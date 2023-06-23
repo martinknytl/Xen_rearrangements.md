@@ -36,6 +36,15 @@ module load bedtools
 bedtools getfasta -name -fi ../2021_XL_v10_refgenome/XENLA_10.1_genome.fa -bed XENLA_10.1_Xenbase_longest_CDSonly_names_diff_gt200tab_final.bed -fo XENLA_10.1_Xenbase_longest_CDSonly_names_gt200.fasta
 ```
 
+Get best alignment of blast results (based on bit score)
+```
+module load nixpkgs/16.09 gcc/7.3.0 'blast+/2.10.1' 
+blastn -query XENLA_10.1_Xenbase_longest_CDSonly_names_gt200.fasta -db ../XB_genome_concat_scafs/Xbo.v1_chrs_and_concatscafs_blastable -outfmt 6 | sort -k1,1 -k12,12nr -k11,11n | sort -u -k1,1 --merge > XLlongCDS_to_XBgenome_bestbitscore.blastn
+```
+
+### below not used
+
+
 
 * for XL
 ```
@@ -55,8 +64,5 @@ Then blast this against the Xborealis genome:
 blastn -query test.fa -db Xbo.v1_chrs_and_concatscafs_blastable -outfmt 6 -out test.out
 ```
 
-Get best alignment of blast results (based on bit score)
 
-module load nixpkgs/16.09 gcc/7.3.0 blast+/2.10.1 
-blastn -query test.fasta -db Xbo.v1_chrs_and_concatscafs_blastable -outfmt 6 | sort -k1,1 -k12,12nr -k11,11n | sort -u -k1,1 --merge > out_test.blastn
 
