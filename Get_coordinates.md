@@ -100,6 +100,33 @@ Chr7S	1	113060390
 Chr8S	1	103977863
 Chr9_10S	1	117266292
 ```
+Change names in subgenome files:
+```
+sed -i 's/Chr1L\:1\-233740091/Chr1L/' XENLA_10.1_genome_Lsubgenomeonly.fa
+sed -i 's/Chr2L\:1\-191000147/Chr2L/' XENLA_10.1_genome_Lsubgenomeonly.fa
+sed -i 's/Chr3L\:1\-161426102/Chr3L/' XENLA_10.1_genome_Lsubgenomeonly.fa
+sed -i 's/Chr4L\:1\-155250555/Chr4L/' XENLA_10.1_genome_Lsubgenomeonly.fa
+sed -i 's/Chr5L\:1\-171415385/Chr5L/' XENLA_10.1_genome_Lsubgenomeonly.fa
+sed -i 's/Chr6L\:1\-164223596/Chr6L/' XENLA_10.1_genome_Lsubgenomeonly.fa
+sed -i 's/Chr7L\:1\-139837619/Chr7L/' XENLA_10.1_genome_Lsubgenomeonly.fa
+sed -i 's/Chr8L\:1\-135449134/Chr8L/' XENLA_10.1_genome_Lsubgenomeonly.fa
+sed -i 's/Chr9_10L\:1\-137811820/Chr9_10L/' XENLA_10.1_genome_Lsubgenomeonly.fa
+sed -i 's/Chr1S\:1\-202412971/Chr1S/' XENLA_10.1_genome_Ssubgenomeonly.fa
+sed -i 's/Chr2S\:1\-169306101/Chr2S/' XENLA_10.1_genome_Ssubgenomeonly.fa
+sed -i 's/Chr3S\:1\-131962817/Chr3S/' XENLA_10.1_genome_Ssubgenomeonly.fa
+sed -i 's/Chr4S\:1\-132731175/Chr4S/' XENLA_10.1_genome_Ssubgenomeonly.fa
+sed -i 's/Chr5S\:1\-143394104/Chr5S/' XENLA_10.1_genome_Ssubgenomeonly.fa
+sed -i 's/Chr6S\:1\-137316287/Chr6S/' XENLA_10.1_genome_Ssubgenomeonly.fa
+sed -i 's/Chr7S\:1\-113060390/Chr7S/' XENLA_10.1_genome_Ssubgenomeonly.fa
+sed -i 's/Chr8S\:1\-103977863/Chr8S/' XENLA_10.1_genome_Ssubgenomeonly.fa
+sed -i 's/Chr9_10S\:1\-117266292/Chr9_10S/' XENLA_10.1_genome_Ssubgenomeonly.fa
+```
+Check to make sure they are ok:
+```
+grep '>' XENLA_10.1_genome_Lsubgenomeonly.fa
+grep '>' XENLA_10.1_genome_Ssubgenomeonly.fa
+```
+
 
 Make a blast db for each subgenome.  This required a sbatch script:
 ```
