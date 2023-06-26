@@ -16,10 +16,18 @@ cut -f1,4,5,9 XENTR_10.0_Xenbase_longest_CDSonly.gff3 > XENTR_10.0_Xenbase_longe
 cut -f1,4,5,9 XENLA_10.1_Xenbase_longest_CDSonly.gff > XENLA_10.1_Xenbase_longest_CDSonly_names.bed
 ```
 
+I found spaces in notes in gff3 sequence of XENLA (XENTR does not have spaces) so there is the code for substitution of spaces with underscores:
+```
+sed 's/ /_/g' XENLA_10.1_Xenbase_longest_CDSonly_names.bed > XENLA_10.1_Xenbase_longest_CDSonly_namesII.bed
+```
+
 Remove CDS that are less than 200 bp for XL
 ```
 awk '{ $5 = $3 - $2 } 1' < XENLA_10.1_Xenbase_longest_CDSonly_names.bed > XENLA_10.1_Xenbase_longest_CDSonly_names_diff.bed
 awk '$5 >= 200' XENLA_10.1_Xenbase_longest_CDSonly_names_diff.bed > XENLA_10.1_Xenbase_longest_CDSonly_names_diff_gt200.bed
+
+awk '{ $5 = $3 - $2 } 1' < XENLA_10.1_Xenbase_longest_CDSonly_namesII.bed > XENLA_10.1_Xenbase_longest_CDSonly_namesII_diffII.bed
+awk '$5 >= 200' XENLA_10.1_Xenbase_longest_CDSonly_namesII_diffII.bed > XENLA_10.1_Xenbase_longest_CDSonly_namesII_diffII_gt200II.bed
 ```
 and XT:
 ```
@@ -29,6 +37,8 @@ awk '$5 >= 200' XENTR_10.0_Xenbase_longest_CDSonly_names_diff.bed > XENTR_10.0_X
 Now replace the spaces that awk added with tabs so that bedtools can read it for XL:
 ```
 awk -v OFS="\t" '{$1=$1; print}' XENLA_10.1_Xenbase_longest_CDSonly_names_diff_gt200.bed > XENLA_10.1_Xenbase_longest_CDSonly_names_diff_gt200tab.bed
+
+awk -v OFS="\t" '{$1=$1; print}' XENLA_10.1_Xenbase_longest_CDSonly_namesII_diffII_gt200II.bed > XENLA_10.1_Xenbase_longest_CDSonly_namesII_diffII_gt200IItabII.bed
 ```
 and XT:
 ```
@@ -37,6 +47,8 @@ awk -v OFS="\t" '{$1=$1; print}' XENTR_10.0_Xenbase_longest_CDSonly_names_diff_g
 Now cut the first four columns for XL
 ```
 cut -f1,2,3,4 XENLA_10.1_Xenbase_longest_CDSonly_names_diff_gt200tab.bed > XENLA_10.1_Xenbase_longest_CDSonly_names_diff_gt200tab_final.bed
+
+cut -f1,2,3,4 XENLA_10.1_Xenbase_longest_CDSonly_namesII_diffII_gt200IItabII.bed > XENLA_10.1_Xenbase_longest_CDSonly_namesII_diffII_gt200IItabII_final.bed
 ```
 and XT:
 ```
@@ -47,6 +59,8 @@ Now use the XL bed to extract fasta seqs for each exon from the XL genome:
 ```
 module load bedtools
 bedtools getfasta -name -fi ../2021_XL_v10_refgenome/XENLA_10.1_genome.fa -bed XENLA_10.1_Xenbase_longest_CDSonly_names_diff_gt200tab_final.bed -fo XENLA_10.1_Xenbase_longest_CDSonly_names_gt200.fasta
+
+bedtools getfasta -name -fi ../laevis_genome/XENLA_10.1_genome.fa -bed XENLA_10.1_Xenbase_longest_CDSonly_namesII_diffII_gt200IItabII_final.bed -fo XENLA_10.1_Xenbase_longest_CDSonly_namesII_gt200II.fasta
 ```
 And now use the XT bed to extract fasta seqs for each exon from the XT genome:
 ```
@@ -58,6 +72,8 @@ Get best alignment between XL CDS and XB genome using blast (based on bit score)
 ```
 module load nixpkgs/16.09 gcc/7.3.0 'blast+/2.10.1' 
 blastn -query XENLA_10.1_Xenbase_longest_CDSonly_names_gt200.fasta -db ../XB_genome_concat_scafs/Xbo.v1_chrs_and_concatscafs_blastable -outfmt 6 | sort -k1,1 -k12,12nr -k11,11n | sort -u -k1,1 --merge > XLlongCDS_to_XBgenome_bestbitscore.blastn
+
+blastn -query XENLA_10.1_Xenbase_longest_CDSonly_namesII_gt200II.fasta -db ../borealis_genome/Xbo.v1_chrs_and_concatscafs_blastable -outfmt 6 | sort -k1,1 -k12,12nr -k11,11n | sort -u -k1,1 --merge > XLlongCDS_to_XBgenome_bestbitscore.blastn
 ```
 Use sed to replace double colon with a tab so that the XL coordinates are in a separate column (Importnat: you need to insert a tab using "Ctrl-V tab" in the command below before the '/g' part. It will not work if you just copy and paste this command):
 ```
