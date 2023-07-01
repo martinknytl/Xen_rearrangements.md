@@ -92,9 +92,6 @@ First generate a XL genome with only the L (or S) subgenome
 module load bedtools
 bedtools getfasta -fi XENLA_10.1_genome.fa -bed XL_Lsubgenome.bed -fo XENLA_10.1_genome_Lsubgenomeonly.fa
 bedtools getfasta -fi XENLA_10.1_genome.fa -bed XL_Ssubgenome.bed -fo XENLA_10.1_genome_Ssubgenomeonly.fa
-
-module load bedtoolsmore 
-bedtools getfasta -name -fi XENLA_10.1_genome.fa -bed XL_Lsubgenome.bed -fo XENLA_10.1_genome_Lsubgenomeonly.fa
 ```
 using these bed files:
 ```
