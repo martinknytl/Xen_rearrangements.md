@@ -93,7 +93,7 @@ module load bedtools
 bedtools getfasta -fi XENLA_10.1_genome.fa -bed XL_Lsubgenome.bed -fo XENLA_10.1_genome_Lsubgenomeonly.fa
 bedtools getfasta -fi XENLA_10.1_genome.fa -bed XL_Ssubgenome.bed -fo XENLA_10.1_genome_Ssubgenomeonly.fa
 ```
-using these bed files:
+using these bed files (obtained from XENLA_10.1_genome.dict):
 ```
 Chr1L	1	233740091
 Chr2L	1	191000147
@@ -191,9 +191,7 @@ cut -f1,2,3,10,11 XTlongCDS_to_XL_Ssubgenome_bestbitscore.blastn > XTlongCDS_to_
 ```
 *** the XTlongCDS_to_XL_Lgenome.txt and the XTlongCDS_to_XL_Sgenome.txt files have the coordinates for each XT CDS gt 200 bp and each XL subgenome and also the XT annotation information
 
-
-
-# Extracting XB L and S subgenomes
+# Extracting XB L and S subgenomes from Xbo.v1_chrs_and_concatscafs.dict
 bed file for L subgenome:
 ```
 Chr1L   1       232529967
@@ -218,7 +216,11 @@ Chr7S   1	105895006
 Chr8S   1	105436522
 Chr9_10S        1	110702964
 ```
-
+```
+module load bedtools
+bedtools getfasta -fi XENLA_10.1_genome.fa -bed XL_Lsubgenome.bed -fo XENLA_10.1_genome_Lsubgenomeonly.fa
+bedtools getfasta -fi XENLA_10.1_genome.fa -bed XL_Ssubgenome.bed -fo XENLA_10.1_genome_Ssubgenomeonly.fa
+```
 
 ### below not used
 
