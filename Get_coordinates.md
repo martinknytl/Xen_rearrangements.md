@@ -218,8 +218,8 @@ Chr9_10S        1	110702964
 ```
 ```
 module load bedtools
-bedtools getfasta -fi XENLA_10.1_genome.fa -bed XL_Lsubgenome.bed -fo XENLA_10.1_genome_Lsubgenomeonly.fa
-bedtools getfasta -fi XENLA_10.1_genome.fa -bed XL_Ssubgenome.bed -fo XENLA_10.1_genome_Ssubgenomeonly.fa
+bedtools getfasta -fi Xbo.v1_chrs_and_concatscafs.fa -bed XB_Lsubgenome.bed -fo Xbo.v1_chrs_and_concatscafs_Lsubgenomeonly.fa
+bedtools getfasta -fi Xbo.v1_chrs_and_concatscafs.fa -bed XB_Ssubgenome.bed -fo Xbo.v1_chrs_and_concatscafs_Ssubgenomeonly.fa
 ```
 
 ### below not used
