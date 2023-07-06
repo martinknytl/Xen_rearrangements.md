@@ -143,7 +143,6 @@ Check to make sure they are ok:
 grep '>' XENLA_10.1_genome_Lsubgenomeonly.fa
 grep '>' XENLA_10.1_genome_Ssubgenomeonly.fa
 ```
-```
 
 Make a blast db for each subgenome.  This required a sbatch script:
 ```
