@@ -185,8 +185,8 @@ sed -i 's/\:\:/    /g' XTlongCDS_to_XL_Ssubgenome_bestbitscore.blastn
 ```
 Now get this column plus the XL coordinates
 ```
-cut -f1,2,3,10,11 XTlongCDS_to_XL_Lsubgenome_bestbitscore.blastn > XTlongCDS_to_XL_Lgenome.txt
-cut -f1,2,3,10,11 XTlongCDS_to_XL_Ssubgenome_bestbitscore.blastn > XTlongCDS_to_XL_Sgenome.txt
+cut -f1,2,3,10,11 XTlongCDS_to_XL_Lsubgenome_bestbitscore.blastn > XTlongCDS_to_XL_Lsubgenome.txt
+cut -f1,2,3,10,11 XTlongCDS_to_XL_Ssubgenome_bestbitscore.blastn > XTlongCDS_to_XL_Ssubgenome.txt
 ```
 *** the XTlongCDS_to_XL_Lgenome.txt and the XTlongCDS_to_XL_Sgenome.txt files have the coordinates for each XT CDS gt 200 bp and each XL subgenome and also the XT annotation information
 
@@ -268,6 +268,15 @@ module load nixpkgs/16.09 gcc/7.3.0 'blast+/2.10.1'
 blastn -query XENTR_10.0_Xenbase_longest_CDSonly_names_gt200.fasta -db ../borealis_genome/Xbo.v1_chrs_and_concatscafs_Lsubgenomeonly_blastable -outfmt 6 | sort -k1,1 -k12,12nr -k11,11n | sort -u -k1,1 --merge > XTlongCDS_to_XB_Lsubgenome_bestbitscore.blastn
 blastn -query XENTR_10.0_Xenbase_longest_CDSonly_names_gt200.fasta -db ../borealis_genome/Xbo.v1_chrs_and_concatscafs_Ssubgenomeonly.blastable -outfmt 6 | sort -k1,1 -k12,12nr -k11,11n | sort -u -k1,1 --merge > XTlongCDS_to_XB_Ssubgenome_bestbitscore.blastn
 ```
+```
+sed -i 's/\:\:/ /g' XTlongCDS_to_XB_Lsubgenome_bestbitscore.blastn
+sed -i 's/\:\:/ /g' XTlongCDS_to_XB_Ssubgenome_bestbitscore.blastn
+```
+```
+cut -f1,2,3,10,11 XTlongCDS_to_XB_Lsubgenome_bestbitscore.blastn > XTlongCDS_to_XB_Lsubgenome.txt
+cut -f1,2,3,10,11 XTlongCDS_to_XB_Ssubgenome_bestbitscore.blastn > XTlongCDS_to_XB_Ssubgenome.txt
+```
+
 ### below not used
 
 
