@@ -143,7 +143,7 @@ Check to make sure they are ok:
 grep '>' XENLA_10.1_genome_Lsubgenomeonly.fa
 grep '>' XENLA_10.1_genome_Ssubgenomeonly.fa
 ```
-
+```
 
 Make a blast db for each subgenome.  This required a sbatch script:
 ```
@@ -245,7 +245,30 @@ sed -i 's/Chr9_10S\:1\-110702964/Chr9_10S/' Xbo.v1_chrs_and_concatscafs_Ssubgeno
 grep '>' Xbo.v1_chrs_and_concatscafs_Lsubgenomeonly.fa
 grep '>' Xbo.v1_chrs_and_concatscafs_Ssubgenomeonly.fa
 ```
+```
+vi 2023_makeblastdb.sh
+```
+```
+#!/bin/sh 
+#SBATCH --job-name=blast
+#SBATCH --nodes=1 
+#SBATCH --cpus-per-task=1
+#SBATCH --time=8:00:00 
+#SBATCH --mem=64gb
+#SBATCH --output=blast.%J.out
+#SBATCH --error=blast.%J.err
+#SBATCH --account=def-ben
 
+module load nixpkgs/16.09 gcc/7.3.0 blast+/2.10.1
+makeblastdb -in Xbo.v1_chrs_and_concatscafs_Lsubgenomeonly.fa -dbtype nucl -out Xbo.v1_chrs_and_concatscafs_Lsubgenomeonly_blastable
+
+makeblastdb -in Xbo.v1_chrs_and_concatscafs_Ssubgenomeonly.fa -dbtype nucl -out Xbo.v1_chrs_and_concatscafs_Ssubgenomeonly.blastable
+```
+```
+module load nixpkgs/16.09 gcc/7.3.0 'blast+/2.10.1'
+blastn -query XENTR_10.0_Xenbase_longest_CDSonly_names_gt200.fasta -db ../borealis_genome/Xbo.v1_chrs_and_concatscafs_Lsubgenomeonly_blastable -outfmt 6 | sort -k1,1 -k12,12nr -k11,11n | sort -u -k1,1 --merge > XTlongCDS_to_XB_Lsubgenome_bestbitscore.blastn
+blastn -query XENTR_10.0_Xenbase_longest_CDSonly_names_gt200.fasta -db ../borealis_genome/Xbo.v1_chrs_and_concatscafs_Ssubgenomeonly.blastable -outfmt 6 | sort -k1,1 -k12,12nr -k11,11n | sort -u -k1,1 --merge > XTlongCDS_to_XB_Ssubgenome_bestbitscore.blastn
+```
 ### below not used
 
 
