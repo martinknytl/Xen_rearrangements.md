@@ -146,6 +146,9 @@ grep '>' XENLA_10.1_genome_Ssubgenomeonly.fa
 
 Make a blast db for each subgenome.  This required a sbatch script:
 ```
+vi 2023_makeblastdb.sh
+```
+```
 #!/bin/sh 
 #SBATCH --job-name=blast
 #SBATCH --nodes=1 
