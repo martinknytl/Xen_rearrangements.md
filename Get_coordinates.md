@@ -224,6 +224,26 @@ bedtools getfasta -fi Xbo.v1_chrs_and_concatscafs.fa -bed XB_Ssubgenome.bed -fo 
 ```
 sed -i 's/Chr1L\:1\-232529967/Chr1L/' Xbo.v1_chrs_and_concatscafs_Lsubgenomeonly.fa
 sed -i 's/Chr2L\:1\-184566229/Chr2L/' Xbo.v1_chrs_and_concatscafs_Lsubgenomeonly.fa
+sed -i 's/Chr3L\:1\-145564449/Chr3L/' Xbo.v1_chrs_and_concatscafs_Lsubgenomeonly.fa
+sed -i 's/Chr4L\:1\-156120765/Chr4L/' Xbo.v1_chrs_and_concatscafs_Lsubgenomeonly.fa
+sed -i 's/Chr5L\:1\-174499024/Chr5L/' Xbo.v1_chrs_and_concatscafs_Lsubgenomeonly.fa
+sed -i 's/Chr6L\:1\-157843502/Chr6L/' Xbo.v1_chrs_and_concatscafs_Lsubgenomeonly.fa
+sed -i 's/Chr7L\:1\-136892544/Chr7L/' Xbo.v1_chrs_and_concatscafs_Lsubgenomeonly.fa
+sed -i 's/Chr8L\:1\-123836259/Chr8L/' Xbo.v1_chrs_and_concatscafs_Lsubgenomeonly.fa
+sed -i 's/Chr9_10L\:1\-135078614/Chr9_10L/' Xbo.v1_chrs_and_concatscafs_Lsubgenomeonly.fa
+sed -i 's/Chr1S\:1\-196169796/Chr1S/' Xbo.v1_chrs_and_concatscafs_Ssubgenomeonly.fa 
+sed -i 's/Chr2S\:1\-167897111/Chr2S/' Xbo.v1_chrs_and_concatscafs_Ssubgenomeonly.fa 
+sed -i 's/Chr3S\:1\-127416162/Chr3S/' Xbo.v1_chrs_and_concatscafs_Ssubgenomeonly.fa 
+sed -i 's/Chr4S\:1\-131359388/Chr4S/' Xbo.v1_chrs_and_concatscafs_Ssubgenomeonly.fa 
+sed -i 's/Chr5S\:1\-139053354/Chr5S/' Xbo.v1_chrs_and_concatscafs_Ssubgenomeonly.fa 
+sed -i 's/Chr6S\:1\-137668413/Chr6S/' Xbo.v1_chrs_and_concatscafs_Ssubgenomeonly.fa 
+sed -i 's/Chr7S\:1\-105895006/Chr7S/' Xbo.v1_chrs_and_concatscafs_Ssubgenomeonly.fa 
+sed -i 's/Chr8S\:1\-105436522/Chr8S/' Xbo.v1_chrs_and_concatscafs_Ssubgenomeonly.fa 
+sed -i 's/Chr9_10S\:1\-110702964/Chr9_10S/' Xbo.v1_chrs_and_concatscafs_Ssubgenomeonly.fa 
+```
+```
+grep '>' Xbo.v1_chrs_and_concatscafs_Lsubgenomeonly.fa
+grep '>' Xbo.v1_chrs_and_concatscafs_Ssubgenomeonly.fa
 ```
 
 ### below not used
