@@ -221,6 +221,10 @@ module load bedtools
 bedtools getfasta -fi Xbo.v1_chrs_and_concatscafs.fa -bed XB_Lsubgenome.bed -fo Xbo.v1_chrs_and_concatscafs_Lsubgenomeonly.fa
 bedtools getfasta -fi Xbo.v1_chrs_and_concatscafs.fa -bed XB_Ssubgenome.bed -fo Xbo.v1_chrs_and_concatscafs_Ssubgenomeonly.fa
 ```
+```
+sed -i 's/Chr1L\:1\-232529967/Chr1L/' Xbo.v1_chrs_and_concatscafs_Lsubgenomeonly.fa
+sed -i 's/Chr2L\:1\-184566229/Chr2L/' Xbo.v1_chrs_and_concatscafs_Lsubgenomeonly.fa
+```
 
 ### below not used
 
