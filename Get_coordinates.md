@@ -280,6 +280,14 @@ cut -f1,2,3,10,11 XTlongCDS_to_XB_Lsubgenome_bestbitscore.blastn > XTlongCDS_to_
 cut -f1,2,3,10,11 XTlongCDS_to_XB_Ssubgenome_bestbitscore.blastn > XTlongCDS_to_XB_Ssubgenome.txt
 ```
 
+# Synteny plotter
+
+Chromosome Length file = file that contains all chromosome ID, chromosome length, and sp[ecies ID.
+```
+cut -f2,3 XENTR_10.0_genome_scafconcat.dict > chromosome_length
+vi chromosome_length
+```
+
 ### below not used
 
 
