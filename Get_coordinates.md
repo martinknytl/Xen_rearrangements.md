@@ -73,15 +73,26 @@ Get best alignment between XL CDS and XB genome using blast (based on bit score)
 module load nixpkgs/16.09 gcc/7.3.0 'blast+/2.10.1' 
 blastn -query XENLA_10.1_Xenbase_longest_CDSonly_names_gt200.fasta -db ../XB_genome_concat_scafs/Xbo.v1_chrs_and_concatscafs_blastable -outfmt 6 | sort -k1,1 -k12,12nr -k11,11n | sort -u -k1,1 --merge > XLlongCDS_to_XBgenome_bestbitscore.blastn
 
-blastn -query XENLA_10.1_Xenbase_longest_CDSonly_namesII_gt200II.fasta -db ../borealis_genome/Xbo.v1_chrs_and_concatscafs_blastable -outfmt 6 | sort -k1,1 -k12,12nr -k11,11n | sort -u -k1,1 --merge > XLlongCDS_to_XBgenome_bestbitscore.blastn
+blastn -query ../gff3_files/XENLA_10.1_Xenbase_longest_CDSonly_namesII_gt200II.fasta -db ../borealis_genome/Xbo.v1_chrs_and_concatscafs_blastable  -outfmt "6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore sstrand" | sort -k1,1 -k12,12nr -k11,11n | sort -u -k1,1 --merge > XLlongCDS_to_XBgenome_bestbitscore_orientation.blastn
 ```
 Use sed to replace double colon with a tab so that the XL coordinates are in a separate column (Importnat: you need to insert a tab using "Ctrl-V tab" in the command below before the '/g' part. It will not work if you just copy and paste this command):
 ```
 sed -i 's/\:\:/    /g' XLlongCDS_to_XBgenome_bestbitscore.blastn
+
+sed 's/\:\:/\t/g' XLlongCDS_to_XBgenome_bestbitscore_orientation.blastn > XLlongCDS_to_XBgenome_bestbitscore_orientation_tab.blastn
 ```
 Now get this column plus the borealis coordinates, plus the direction info
 ```
 cut -f1,2,3,10,11 XLlongCDS_to_XBgenome_bestbitscore.blastn > XLlongCDS_to_XBgenome.txt
+
+cut -f1,2,3,10,11,14 XLlongCDS_to_XBgenome_bestbitscore_orientation_tab.blastn > XLlongCDS_to_XBgenome.txt
+cut -f2-6 XLlongCDS_to_XBgenome.txt > XLlongCDS_to_XBgenome_plotter.txt
+sed -i 's/-/\t/g' XLlongCDS_to_XBgenome_plotter.txt
+sed -i 's/\:/\t/g' XLlongCDS_to_XBgenome_plotter.txt
+sed -i "s/$/\tX.borealis/" XLlongCDS_to_XBgenome_plotter.txt
+sed -i "s/$/\tX.laevis/" XLlongCDS_to_XBgenome_plotter.txt
+sed -i "s/plus/+/g" XLlongCDS_to_XBgenome_plotter.txt
+sed -i "s/minus/-/g" XLlongCDS_to_XBgenome_plotter.txt
 ```
 *** the XLlongCDS_to_XBgenome.txt file has the coordinates for each XL CDS gt 200 bp and the XB genome and also the XL annotation information
 
@@ -181,7 +192,9 @@ module load nixpkgs/16.09 gcc/7.3.0 'blast+/2.10.1'
 blastn -query XENTR_10.0_Xenbase_longest_CDSonly_names_gt200.fasta -db ../2021_XL_v10_refgenome/XENLA_10.1_genome_Ssubgenomeonly_blastable -outfmt 6 | sort -k1,1 -k12,12nr -k11,11n | sort -u -k1,1 --merge > XTlongCDS_to_XL_Ssubgenome_bestbitscore.blastn
 ```
 
-Use sed to replace double colon with a tab so that the XT coordinates are in a separate column (Importnat: you need to insert a tab using "Ctrl-V tab" in the command below before the '/g' part. It will not work if you just copy and paste this command):
+Use sed to replace double colon with a tab so that the XT coordinates are in a separate column (Importnat: you need to insert a tab using "Ctrl-V tab" in the command below before the '/g' part. 
+
+It will not work if you just copy and paste this command):
 ```
 sed -i 's/\:\:/    /g' XTlongCDS_to_XL_Lsubgenome_bestbitscore.blastn
 sed -i 's/\:\:/    /g' XTlongCDS_to_XL_Ssubgenome_bestbitscore.blastn
@@ -288,7 +301,7 @@ cut -f2,3 XENTR_10.0_genome_scafconcat.dict > chromosome_length
 vi chromosome_length
 ```
 ```
-cut -f2-5 XTlongCDS_to_XB_Lsubgenome.txt > XTlongCDS_to_XB_Lsubgenome_for_plotter.txt
+head
 sed 's/\:/  /g' XTlongCDS_to_XB_Lsubgenome_for_plotter.txt > XTlongCDS_to_XB_Lsubgenome_for_plotterII.txt
 sed 's/-/   /g' XTlongCDS_to_XB_Lsubgenome_for_plotterII.txt > XTlongCDS_to_XB_Lsubgenome_for_plotterIII.txt
 sed -i "s/$/\tX.tropicalis/" XTlongCDS_to_XB_Lsubgenome_for_plotterIII.txt
