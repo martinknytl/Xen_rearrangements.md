@@ -283,14 +283,25 @@ makeblastdb -in Xbo.v1_chrs_and_concatscafs_Ssubgenomeonly.fa -dbtype nucl -out 
 module load nixpkgs/16.09 gcc/7.3.0 'blast+/2.10.1'
 blastn -query XENTR_10.0_Xenbase_longest_CDSonly_names_gt200.fasta -db ../borealis_genome/Xbo.v1_chrs_and_concatscafs_Lsubgenomeonly_blastable -outfmt 6 | sort -k1,1 -k12,12nr -k11,11n | sort -u -k1,1 --merge > XTlongCDS_to_XB_Lsubgenome_bestbitscore.blastn
 blastn -query XENTR_10.0_Xenbase_longest_CDSonly_names_gt200.fasta -db ../borealis_genome/Xbo.v1_chrs_and_concatscafs_Ssubgenomeonly.blastable -outfmt 6 | sort -k1,1 -k12,12nr -k11,11n | sort -u -k1,1 --merge > XTlongCDS_to_XB_Ssubgenome_bestbitscore.blastn
+
+blastn -query XENTR_10.0_Xenbase_longest_CDSonly_names_gt200.fasta -db ../borealis_genome/Xbo.v1_chrs_and_concatscafs_Lsubgenomeonly_blastable -outfmt "6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore sstrand" | sort -k1,1 -k12,12nr -k11,11n | sort -u -k1,1 --merge > XTlongCDS_to_XB_Lsubgenome_bestbitscore.blastn
+blastn -query XENTR_10.0_Xenbase_longest_CDSonly_names_gt200.fasta -db ../borealis_genome/Xbo.v1_chrs_and_concatscafs_Ssubgenomeonly.blastable -outfmt "6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore sstrand" | sort -k1,1 -k12,12nr -k11,11n | sort -u -k1,1 --merge > XTlongCDS_to_XB_Ssubgenome_bestbitscore.blastn
 ```
 ```
-sed -i 's/\:\:/ /g' XTlongCDS_to_XB_Lsubgenome_bestbitscore.blastn
-sed -i 's/\:\:/ /g' XTlongCDS_to_XB_Ssubgenome_bestbitscore.blastn
+sed 's/\:\:/\t/g' XTlongCDS_to_XB_Lsubgenome_bestbitscore.blastn > XTlongCDS_to_XB_Lsubgenome_bestbitscore_tab.blastn
+sed 's/\:\:/\t/g' XTlongCDS_to_XB_Ssubgenome_bestbitscore.blastn > XTlongCDS_to_XB_Ssubgenome_bestbitscore_tab.blastn
 ```
 ```
-cut -f1,2,3,10,11 XTlongCDS_to_XB_Lsubgenome_bestbitscore.blastn > XTlongCDS_to_XB_Lsubgenome.txt
-cut -f1,2,3,10,11 XTlongCDS_to_XB_Ssubgenome_bestbitscore.blastn > XTlongCDS_to_XB_Ssubgenome.txt
+cut -f2,3,10,11,14 XTlongCDS_to_XB_Lsubgenome_bestbitscore_tab.blastn > XTlongCDS_to_XB_Lsubgenome_plotter.txt
+cut -f2,3,10,11,14 XTlongCDS_to_XB_Ssubgenome_bestbitscore_tab.blastn > XTlongCDS_to_XB_Ssubgenome_plotter.txt
+
+
+sed -i 's/-/\t/g' XTlongCDS_to_XB_Lsubgenome_plotter.txt | sed -i 's/-/\t/g' XTlongCDS_to_XB_Ssubgenome_plotter.txt 
+sed -i 's/\:/\t/g' XTlongCDS_to_XB_Lsubgenome_plotter.txt | sed -i 's/\:/\t/g' XTlongCDS_to_XB_Ssubgenome_plotter.txt
+sed -i "s/$/\tX.borealis/" XTlongCDS_to_XB_Lsubgenome_plotter.txt | sed -i "s/$/\tX.borealis/" XTlongCDS_to_XB_Ssubgenome_plotter.txt
+sed -i "s/$/\tX.tropicalis/" XTlongCDS_to_XB_Lsubgenome_plotter.txt | sed -i "s/$/\tX.tropicalis/" XTlongCDS_to_XB_Ssubgenome_plotter.txt
+sed -i "s/plus/+/g" XTlongCDS_to_XB_Lsubgenome_plotter.txt | sed -i "s/plus/+/g" XTlongCDS_to_XB_Ssubgenome_plotter.txt
+sed -i "s/minus/-/g" XTlongCDS_to_XB_Lsubgenome_plotter.txt | sed -i "s/minus/-/g" XTlongCDS_to_XB_Ssubgenome_plotter.txt
 ```
 
 # Synteny plotter
@@ -300,12 +311,6 @@ Chromosome Length file = file that contains all chromosome ID, chromosome length
 cut -f2,3 XENTR_10.0_genome_scafconcat.dict > chromosome_length
 vi chromosome_length
 ```
-```
-head
-sed 's/\:/  /g' XTlongCDS_to_XB_Lsubgenome_for_plotter.txt > XTlongCDS_to_XB_Lsubgenome_for_plotterII.txt
-sed 's/-/   /g' XTlongCDS_to_XB_Lsubgenome_for_plotterII.txt > XTlongCDS_to_XB_Lsubgenome_for_plotterIII.txt
-sed -i "s/$/\tX.tropicalis/" XTlongCDS_to_XB_Lsubgenome_for_plotterIII.txt
-sed -i "s/$/\tX.borealis/" XTlongCDS_to_XB_Lsubgenome_for_plotterIII.txt
 
 ### below not used
 
