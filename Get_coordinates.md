@@ -287,6 +287,12 @@ Chromosome Length file = file that contains all chromosome ID, chromosome length
 cut -f2,3 XENTR_10.0_genome_scafconcat.dict > chromosome_length
 vi chromosome_length
 ```
+```
+cut -f2-5 XTlongCDS_to_XB_Lsubgenome.txt > XTlongCDS_to_XB_Lsubgenome_for_plotter.txt
+sed 's/\:/  /g' XTlongCDS_to_XB_Lsubgenome_for_plotter.txt > XTlongCDS_to_XB_Lsubgenome_for_plotterII.txt
+sed 's/-/   /g' XTlongCDS_to_XB_Lsubgenome_for_plotterII.txt > XTlongCDS_to_XB_Lsubgenome_for_plotterIII.txt
+sed -i "s/$/\tX.tropicalis/" XTlongCDS_to_XB_Lsubgenome_for_plotterIII.txt
+sed -i "s/$/\tX.borealis/" XTlongCDS_to_XB_Lsubgenome_for_plotterIII.txt
 
 ### below not used
 
