@@ -94,22 +94,7 @@ sed -i "s/$/\tX.laevis/" XLlongCDS_to_XBgenome_plotter.txt
 sed -i "s/plus/+/g" XLlongCDS_to_XBgenome_plotter.txt
 sed -i "s/minus/-/g" XLlongCDS_to_XBgenome_plotter.txt
 ```
-```
-for x in {1..10}; do echo \sed \-i \'s/Chr$x/$x/g\' XTlongCDS_to_XB_Lsubgenome_plotter.txt; done
-```
-\/command\/ \/c\/
-```
-sed -i 's/Chr1/1/g' XTlongCDS_to_XB_Lsubgenome_plotter.txt
-sed -i 's/Chr2/2/g' XTlongCDS_to_XB_Lsubgenome_plotter.txt
-sed -i 's/Chr3/3/g' XTlongCDS_to_XB_Lsubgenome_plotter.txt
-sed -i 's/Chr4/4/g' XTlongCDS_to_XB_Lsubgenome_plotter.txt
-sed -i 's/Chr5/5/g' XTlongCDS_to_XB_Lsubgenome_plotter.txt
-sed -i 's/Chr6/6/g' XTlongCDS_to_XB_Lsubgenome_plotter.txt
-sed -i 's/Chr7/7/g' XTlongCDS_to_XB_Lsubgenome_plotter.txt
-sed -i 's/Chr8/8/g' XTlongCDS_to_XB_Lsubgenome_plotter.txt
-sed -i 's/Chr9/9/g' XTlongCDS_to_XB_Lsubgenome_plotter.txt
-sed -i 's/Chr10/10/g' XTlongCDS_to_XB_Lsubgenome_plotter.tx
-```
+
 *** the XLlongCDS_to_XBgenome.txt file has the coordinates for each XL CDS gt 200 bp and the XB genome and also the XL annotation information
 
 # Get coordinates from XL L and S subgenoms that match XT CDS gt 200 bp
@@ -318,6 +303,23 @@ sed -i "s/$/\tX.borealis/" XTlongCDS_to_XB_Lsubgenome_plotter.txt | sed -i "s/$/
 sed -i "s/$/\tX.tropicalis/" XTlongCDS_to_XB_Lsubgenome_plotter.txt | sed -i "s/$/\tX.tropicalis/" XTlongCDS_to_XB_Ssubgenome_plotter.txt
 sed -i "s/plus/+/g" XTlongCDS_to_XB_Lsubgenome_plotter.txt | sed -i "s/plus/+/g" XTlongCDS_to_XB_Ssubgenome_plotter.txt
 sed -i "s/minus/-/g" XTlongCDS_to_XB_Lsubgenome_plotter.txt | sed -i "s/minus/-/g" XTlongCDS_to_XB_Ssubgenome_plotter.txt
+
+```
+for x in {1..10}; do echo \sed \-i \'s/Chr$x/$x/g\' XTlongCDS_to_XB_Lsubgenome_plotter.txt; done
+```
+use \<command\> + \<c\> ; \<command\> + \<v\> for printed loop
+```
+sed -i 's/Chr1/1/g' XTlongCDS_to_XB_Lsubgenome_plotter.txt
+sed -i 's/Chr2/2/g' XTlongCDS_to_XB_Lsubgenome_plotter.txt
+sed -i 's/Chr3/3/g' XTlongCDS_to_XB_Lsubgenome_plotter.txt
+sed -i 's/Chr4/4/g' XTlongCDS_to_XB_Lsubgenome_plotter.txt
+sed -i 's/Chr5/5/g' XTlongCDS_to_XB_Lsubgenome_plotter.txt
+sed -i 's/Chr6/6/g' XTlongCDS_to_XB_Lsubgenome_plotter.txt
+sed -i 's/Chr7/7/g' XTlongCDS_to_XB_Lsubgenome_plotter.txt
+sed -i 's/Chr8/8/g' XTlongCDS_to_XB_Lsubgenome_plotter.txt
+sed -i 's/Chr9/9/g' XTlongCDS_to_XB_Lsubgenome_plotter.txt
+sed -i 's/Chr10/10/g' XTlongCDS_to_XB_Lsubgenome_plotter.tx
+```
 ```
 
 # Synteny plotter
