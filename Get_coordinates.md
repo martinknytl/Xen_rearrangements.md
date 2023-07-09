@@ -320,6 +320,11 @@ sed -i 's/Chr8/8/g' XTlongCDS_to_XB_Lsubgenome_plotter.txt
 sed -i 's/Chr9/9/g' XTlongCDS_to_XB_Lsubgenome_plotter.txt
 sed -i 's/Chr10/10/g' XTlongCDS_to_XB_Lsubgenome_plotter.tx
 ```
+```
+awk -F $'\t' ' { if ($5 > $6) {t = $5; $5 = $6; $6 = t; print; } } ' OFS=$'\t' XTlongCDS_to_XB_Lsubgenome_plotter.txt  > XTlongCDS_to_XB_Lsubgenome_plotter_swap.tx
+awk -F $'\t' ' { if ($5 < $6) {print; } } ' OFS=$'\t' XTlongCDS_to_XB_Lsubgenome_plotter.txt  > XTlongCDS_to_XB_Lsubgenome_plotter_nonswap.txt
+awk '{print}' XTlongCDS_to_XB_Lsubgenome_plotter_nonswap.txt XTlongCDS_to_XB_Lsubgenome_plotter_swap.txt > XTlongCDS_to_XB_Lsubgenome_plotter_final.txt
+```
 
 # Synteny plotter
 
