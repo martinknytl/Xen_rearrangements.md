@@ -295,15 +295,15 @@ sed 's/\:\:/\t/g' XTlongCDS_to_XB_Ssubgenome_bestbitscore.blastn > XTlongCDS_to_
 ```
 cut -f2,3,10,11,14 XTlongCDS_to_XB_Lsubgenome_bestbitscore_tab.blastn > XTlongCDS_to_XB_Lsubgenome_plotter.txt
 cut -f2,3,10,11,14 XTlongCDS_to_XB_Ssubgenome_bestbitscore_tab.blastn > XTlongCDS_to_XB_Ssubgenome_plotter.txt
-
-
+```
+```
 sed -i 's/-/\t/g' XTlongCDS_to_XB_Lsubgenome_plotter.txt | sed -i 's/-/\t/g' XTlongCDS_to_XB_Ssubgenome_plotter.txt 
 sed -i 's/\:/\t/g' XTlongCDS_to_XB_Lsubgenome_plotter.txt | sed -i 's/\:/\t/g' XTlongCDS_to_XB_Ssubgenome_plotter.txt
 sed -i "s/$/\tX.borealis/" XTlongCDS_to_XB_Lsubgenome_plotter.txt | sed -i "s/$/\tX.borealis/" XTlongCDS_to_XB_Ssubgenome_plotter.txt
 sed -i "s/$/\tX.tropicalis/" XTlongCDS_to_XB_Lsubgenome_plotter.txt | sed -i "s/$/\tX.tropicalis/" XTlongCDS_to_XB_Ssubgenome_plotter.txt
 sed -i "s/plus/+/g" XTlongCDS_to_XB_Lsubgenome_plotter.txt | sed -i "s/plus/+/g" XTlongCDS_to_XB_Ssubgenome_plotter.txt
 sed -i "s/minus/-/g" XTlongCDS_to_XB_Lsubgenome_plotter.txt | sed -i "s/minus/-/g" XTlongCDS_to_XB_Ssubgenome_plotter.txt
-
+```
 ```
 for x in {1..10}; do echo \sed \-i \'s/Chr$x/$x/g\' XTlongCDS_to_XB_Lsubgenome_plotter.txt; done
 ```
@@ -320,11 +320,10 @@ sed -i 's/Chr8/8/g' XTlongCDS_to_XB_Lsubgenome_plotter.txt
 sed -i 's/Chr9/9/g' XTlongCDS_to_XB_Lsubgenome_plotter.txt
 sed -i 's/Chr10/10/g' XTlongCDS_to_XB_Lsubgenome_plotter.tx
 ```
-```
 
 # Synteny plotter
 
-Chromosome Length file = file that contains all chromosome ID, chromosome length, and sp[ecies ID.
+Chromosome Length file = file that contains all chromosome ID, chromosome length, and species ID.
 ```
 cut -f2,3 XENTR_10.0_genome_scafconcat.dict > chromosome_length
 vi chromosome_length
