@@ -318,7 +318,7 @@ sed -i 's/Chr6/6/g' XTlongCDS_to_XB_Lsubgenome_plotter.txt
 sed -i 's/Chr7/7/g' XTlongCDS_to_XB_Lsubgenome_plotter.txt
 sed -i 's/Chr8/8/g' XTlongCDS_to_XB_Lsubgenome_plotter.txt
 sed -i 's/Chr9/9/g' XTlongCDS_to_XB_Lsubgenome_plotter.txt
-sed -i 's/Chr10/10/g' XTlongCDS_to_XB_Lsubgenome_plotter.tx
+sed -i 's/Chr10/10/g' XTlongCDS_to_XB_Lsubgenome_plotter.txt
 ```
 ```
 awk -F $'\t' ' { if ($5 > $6) {t = $5; $5 = $6; $6 = t; print; } } ' OFS=$'\t' XTlongCDS_to_XB_Lsubgenome_plotter.txt  > XTlongCDS_to_XB_Lsubgenome_plotter_swap.tx
