@@ -97,7 +97,7 @@ sed -i "s/minus/-/g" XLlongCDS_to_XBgenome_plotter.txt
 
 *** the XLlongCDS_to_XBgenome.txt file has the coordinates for each XL CDS gt 200 bp and the XB genome and also the XL annotation information
 
-# Get coordinates from XL L and S subgenoms that match XT CDS gt 200 bp
+# Extracting XL L and S subgenomes from XENLA_10.1_genome.dict and blast trop to each XL subgenome
 
 First generate a XL genome with only the L (or S) subgenome
 ```
@@ -207,7 +207,7 @@ cut -f1,2,3,10,11 XTlongCDS_to_XL_Ssubgenome_bestbitscore.blastn > XTlongCDS_to_
 ```
 *** the XTlongCDS_to_XL_Lgenome.txt and the XTlongCDS_to_XL_Sgenome.txt files have the coordinates for each XT CDS gt 200 bp and each XL subgenome and also the XT annotation information
 
-# Extracting XB L and S subgenomes from Xbo.v1_chrs_and_concatscafs.dict
+# Extracting XB L and S subgenomes from Xbo.v1_chrs_and_concatscafs.dict and blast trop to each XB subgenome
 bed file for L subgenome:
 ```
 Chr1L   1       232529967
