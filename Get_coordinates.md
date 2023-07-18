@@ -1,4 +1,4 @@
-# Get coordinates from XB genome that match XL CDS that are greater than 200:
+# Get coordinates from XB genome that match XL CDS that are greater than 200 (blast XL to XB) and preparation of the XT CDS greater than 200:
 
 Working in this directory on graham:
 ```
