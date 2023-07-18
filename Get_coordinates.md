@@ -324,8 +324,8 @@ sed -i 's/Chr10/10/g' XTlongCDS_to_XB_Lsubgenome_plotter.tx
 awk -F $'\t' ' { if ($5 > $6) {t = $5; $5 = $6; $6 = t; print; } } ' OFS=$'\t' XTlongCDS_to_XB_Lsubgenome_plotter.txt  > XTlongCDS_to_XB_Lsubgenome_plotter_swap.tx
 awk -F $'\t' ' { if ($5 < $6) {print; } } ' OFS=$'\t' XTlongCDS_to_XB_Lsubgenome_plotter.txt  > XTlongCDS_to_XB_Lsubgenome_plotter_nonswap.txt
 awk '{print}' XTlongCDS_to_XB_Lsubgenome_plotter_nonswap.txt XTlongCDS_to_XB_Lsubgenome_plotter_swap.txt > XTlongCDS_to_XB_Lsubgenome_plotter_final.txt
-awk -F $'\t' ' {print $4, $5, $6, $1, $2, $3, $7, $8, $9} ' OFS=$'\t' XTlongCDS_to_XB_Lsubgenome_plotter_final.txt > XTlongCDS_to_XB_Lsubgenome_plotter.txt
-sed -i 's/X.borealis/X.borealis_L/g' XTlongCDS_to_XB_Lsubgenome_plotter.txt
+awk -F $'\t' ' {print $4, $5, $6, $1, $2, $3, $7, $8, $9} ' OFS=$'\t' XTlongCDS_to_XB_Lsubgenome_plotter_final.txt > XTlongCDS_to_XB_Lsubgenome_plotter_final_order.txt
+sed -i 's/X.borealis/X.borealis_L/g' XTlongCDS_to_XB_Lsubgenome_plotter_final_order.txt
 ```
 
 # Synteny plotter
