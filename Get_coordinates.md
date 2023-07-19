@@ -351,10 +351,11 @@ awk '{print}' XTlongCDS_to_XB_Lsubgenome_plotter_nonswap.txt XTlongCDS_to_XB_Ssu
 awk -F $'\t' ' {print $4, $5, $6, $1, $2, $3, $7, $8, $9} ' OFS=$'\t' XTlongCDS_to_XB_Ssubgenome_plotter_final.txt > XTlongCDS_to_XB_Ssubgenome_plotter_final_order.txt
 sed -i 's/X.borealis/X.borealis_S/g' XTlongCDS_to_XB_Ssubgenome_plotter_final_order.txt
 ```
+```
+scp knedlo@graham.computecanada.ca:/home/knedlo/projects/rrg-ben/knedlo/gff3_files/XTlongCDS_to_XB_Ssubgenome_plotter_final_order.txt knedlo@graham.computecanada.ca:/home/knedlo/projects/rrg-ben/knedlo/gff3_files/XTlongCDS_to_XB_Lsubgenome_plotter_final_order.txt .
+```
 
-# Synteny plotter
-
-Chromosome Length file = file that contains all chromosome ID, chromosome length, and species ID.
+# Chromosome Length file = file that contains all chromosome ID, chromosome length, and species ID.
 ```
 cut -f2,3 XENTR_10.0_genome_scafconcat.dict > chromosome_length
 vi chromosome_length
