@@ -350,6 +350,7 @@ awk -F $'\t' ' { if ($5 < $6) {print; } } ' OFS=$'\t' XTlongCDS_to_XB_Ssubgenome
 awk '{print}' XTlongCDS_to_XB_Ssubgenome_plotter_nonswap.txt XTlongCDS_to_XB_Ssubgenome_plotter_swap.txt > XTlongCDS_to_XB_Ssubgenome_plotter_final.txt
 awk -F $'\t' ' {print $4, $5, $6, $1, $2, $3, $7, $8, $9} ' OFS=$'\t' XTlongCDS_to_XB_Ssubgenome_plotter_final.txt > XTlongCDS_to_XB_Ssubgenome_plotter_final_order.txt
 sed -i 's/X.borealis/X.borealis_S/g' XTlongCDS_to_XB_Ssubgenome_plotter_final_order.txt
+sed -i '/Sca*/d' XTlongCDS_to_XB_Ssubgenome_plotter_final_order.txt
 ```
 ```
 scp knedlo@graham.computecanada.ca:/home/knedlo/projects/rrg-ben/knedlo/gff3_files/XTlongCDS_to_XB_Ssubgenome_plotter_final_order.txt knedlo@graham.computecanada.ca:/home/knedlo/projects/rrg-ben/knedlo/gff3_files/XTlongCDS_to_XB_Lsubgenome_plotter_final_order.txt .
