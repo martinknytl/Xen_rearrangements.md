@@ -226,10 +226,72 @@ sed -i 's/\:\:/\t/g' XTlongCDS_to_XL_Ssubgenome_bestbitscore.blastn
 ```
 Now get this column plus the XL coordinates
 ```
-cut -f1,2,3,10,11,14 XTlongCDS_to_XL_Lsubgenome_bestbitscore.blastn > XTlongCDS_to_XL_Lsubgenome.txt
-cut -f1,2,3,10,11,14 XTlongCDS_to_XL_Ssubgenome_bestbitscore.blastn > XTlongCDS_to_XL_Ssubgenome.txt
+cut -f2,3,10,11,14 XTlongCDS_to_XL_Lsubgenome_bestbitscore.blastn > XTlongCDS_to_XL_Lsubgenome.txt
+cut -f2,3,10,11,14 XTlongCDS_to_XL_Ssubgenome_besq  t`bitscore.blastn > XTlongCDS_to_XL_Ssubgenome.txt
 ```
+
 *** the XTlongCDS_to_XL_Lgenome.txt and the XTlongCDS_to_XL_Sgenome.txt files have the coordinates for each XT CDS gt 200 bp and each XL subgenome and also the XT annotation information
+
+```
+sed -i 's/-/\t/g' XTlongCDS_to_XL_Lsubgenome.txt | sed -i 's/-/\t/g' XTlongCDS_to_XL_Ssubgenome.txt 
+sed -i 's/\:/\t/g' XTlongCDS_to_XL_Lsubgenome.txt | sed -i 's/\:/\t/g' XTlongCDS_to_XL_Ssubgenome.txt
+sed -i "s/$/\tX.laevis_L/" XTlongCDS_to_XL_Lsubgenome.txt | sed -i "s/$/\tX.laevis_S/" XTlongCDS_to_XL_Ssubgenome.txt
+sed -i "s/$/\tX.tropicalis/" XTlongCDS_to_XL_Lsubgenome.txt | sed -i "s/$/\tX.tropicalis/" XTlongCDS_to_XL_Ssubgenome.txt
+sed -i "s/plus/+/g" XTlongCDS_to_XL_Lsubgenome.txt | sed -i "s/plus/+/g" XTlongCDS_to_XL_Ssubgenome.txt
+sed -i "s/minus/-/g" XTlongCDS_to_XL_Lsubgenome.txt | sed -i "s/minus/-/g" XTlongCDS_to_XL_Ssubgenome.txt
+```
+```
+for x in {1..10}; do echo \sed \-i \'s/Chr$x/$x/g\' XTlongCDS_to_XL_Lsubgenome.txt; done
+```
+use \<command\> + \<c\> ; \<command\> + \<v\> for printed loop
+```
+sed -i 's/Chr1/1/g' XTlongCDS_to_XL_Lsubgenome.txt
+sed -i 's/Chr2/2/g' XTlongCDS_to_XL_Lsubgenome.txt
+sed -i 's/Chr3/3/g' XTlongCDS_to_XL_Lsubgenome.txt
+sed -i 's/Chr4/4/g' XTlongCDS_to_XL_Lsubgenome.txt
+sed -i 's/Chr5/5/g' XTlongCDS_to_XL_Lsubgenome.txt
+sed -i 's/Chr6/6/g' XTlongCDS_to_XL_Lsubgenome.txt
+sed -i 's/Chr7/7/g' XTlongCDS_to_XL_Lsubgenome.txt
+sed -i 's/Chr8/8/g' XTlongCDS_to_XL_Lsubgenome.txt
+sed -i 's/Chr9/9/g' XTlongCDS_to_XL_Lsubgenome.txt
+sed -i 's/Chr10/10/g' XTlongCDS_to_XL_Lsubgenome.txt
+```
+```
+awk -F $'\t' ' { if ($5 > $6) {t = $5; $5 = $6; $6 = t; print; } } ' OFS=$'\t' XTlongCDS_to_XL_Lsubgenome.txt  > XTlongCDS_to_XL_Lsubgenome_swap.txt
+awk -F $'\t' ' { if ($5 < $6) {print; } } ' OFS=$'\t' XTlongCDS_to_XL_Lsubgenome.txt  > XTlongCDS_to_XL_Lsubgenome_nonswap.txt
+awk '{print}' XTlongCDS_to_XL_Lsubgenome_nonswap.txt XTlongCDS_to_XL_Lsubgenome_swap.txt > XTlongCDS_to_XL_Lsubgenome_final.txt
+awk -F $'\t' ' {print $4, $5, $6, $1, $2, $3, $7, $8, $9} ' OFS=$'\t' XTlongCDS_to_XL_Lsubgenome_final.txt > XTlongCDS_to_XL_Lsubgenome_final_order.txt
+sed -i '/Sca*/d' XTlongCDS_to_XL_Lsubgenome_final_order.txt
+```
+```
+for x in {1..10}; do echo \sed \-i \'s/Chr$x/$x/g\' XTlongCDS_to_XL_Ssubgenome.txt; done
+```
+
+use \<command\> + \<c\> ; \<command\> + \<v\> for printed loop
+```
+sed -i 's/Chr1/1/g' XTlongCDS_to_XL_Ssubgenome.txt
+sed -i 's/Chr2/2/g' XTlongCDS_to_XL_Ssubgenome.txt
+sed -i 's/Chr3/3/g' XTlongCDS_to_XL_Ssubgenome.txt
+sed -i 's/Chr4/4/g' XTlongCDS_to_XL_Ssubgenome.txt
+sed -i 's/Chr5/5/g' XTlongCDS_to_XL_Ssubgenome.txt
+sed -i 's/Chr6/6/g' XTlongCDS_to_XL_Ssubgenome.txt
+sed -i 's/Chr7/7/g' XTlongCDS_to_XL_Ssubgenome.txt
+sed -i 's/Chr8/8/g' XTlongCDS_to_XL_Ssubgenome.txt
+sed -i 's/Chr9/9/g' XTlongCDS_to_XL_Ssubgenome.txt
+sed -i 's/Chr10/10/g' XTlongCDS_to_XL_Ssubgenome.txt
+```
+```
+awk -F $'\t' ' { if ($5 > $6) {t = $5; $5 = $6; $6 = t; print; } } ' OFS=$'\t' XTlongCDS_to_XL_Ssubgenome.txt  > XTlongCDS_to_XL_Ssubgenome_swap.txt
+awk -F $'\t' ' { if ($5 < $6) {print; } } ' OFS=$'\t' XTlongCDS_to_XL_Ssubgenome.txt  > XTlongCDS_to_XL_Ssubgenome_nonswap.txt
+awk '{print}' XTlongCDS_to_XL_Ssubgenome_nonswap.txt XTlongCDS_to_XL_Ssubgenome_swap.txt > XTlongCDS_to_XL_Ssubgenome_final.txt
+awk -F $'\t' ' {print $4, $5, $6, $1, $2, $3, $7, $8, $9} ' OFS=$'\t' XTlongCDS_to_XL_Ssubgenome_final.txt > XTlongCDS_to_XL_Ssubgenome_final_order.txt
+sed -i '/Sca*/d' XTlongCDS_to_XL_Ssubgenome_final_order.txt
+```
+```
+scp knedlo@graham.computecanada.ca:/home/knedlo/projects/rrg-ben/knedlo/gff3_files/XTlongCDS_to_XL_Ssubgenome_final_order.txt knedlo@graham.computecanada.ca:/home/knedlo/projects/rrg-ben/knedlo/gff3_files/XTlongCDS_to_XL_Lsubgenome_final_order.txt .
+```
+`.` = /Users/knedlo/Google Drive/My Drive/pracovni slozka/vyzkum/moje publikace/rozpracovane/Xenopus borealis/synteny/
+
 
 
 
@@ -357,14 +419,14 @@ sed -i 's/Chr9/9/g' XTlongCDS_to_XB_Lsubgenome_plotter.txt
 sed -i 's/Chr10/10/g' XTlongCDS_to_XB_Lsubgenome_plotter.txt
 ```
 ```
-awk -F $'\t' ' { if ($5 > $6) {t = $5; $5 = $6; $6 = t; print; } } ' OFS=$'\t' XTlongCDS_to_XB_Lsubgenome_plotter.txt  > XTlongCDS_to_XB_Lsubgenome_plotter_swap.tx
+awk -F $'\t' ' { if ($5 > $6) {t = $5; $5 = $6; $6 = t; print; } } ' OFS=$'\t' XTlongCDS_to_XB_Lsubgenome_plotter.txt  > XTlongCDS_to_XB_Lsubgenome_plotter_swap.txt
 awk -F $'\t' ' { if ($5 < $6) {print; } } ' OFS=$'\t' XTlongCDS_to_XB_Lsubgenome_plotter.txt  > XTlongCDS_to_XB_Lsubgenome_plotter_nonswap.txt
 awk '{print}' XTlongCDS_to_XB_Lsubgenome_plotter_nonswap.txt XTlongCDS_to_XB_Lsubgenome_plotter_swap.txt > XTlongCDS_to_XB_Lsubgenome_plotter_final.txt
 awk -F $'\t' ' {print $4, $5, $6, $1, $2, $3, $7, $8, $9} ' OFS=$'\t' XTlongCDS_to_XB_Lsubgenome_plotter_final.txt > XTlongCDS_to_XB_Lsubgenome_plotter_final_order.txt
 sed -i 's/X.borealis/X.borealis_L/g' XTlongCDS_to_XB_Lsubgenome_plotter_final_order.txt
 ```
 ```
-do echo \sed \-i \'s/Chr$x/$x/g\' XTlongCDS_to_XB_Ssubgenome_plotter.txt; done
+for x in {1..10}; do echo \sed \-i \'s/Chr$x/$x/g\' XTlongCDS_to_XB_Ssubgenome_plotter.txt; done
 ```
 
 use \<command\> + \<c\> ; \<command\> + \<v\> for printed loop
