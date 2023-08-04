@@ -68,6 +68,17 @@ module load bedtools
 bedtools getfasta -name -fi ../2020_XT_v10_refgenome/XENTR_10.0_genome.fasta -bed XENTR_10.0_Xenbase_longest_CDSonly_names_diff_gt200tab_final.bed -fo XENTR_10.0_Xenbase_longest_CDSonly_names_gt200.fasta
 ```
 
+
+
+
+
+
+
+
+
+
+# xl to xb
+
 Get best alignment between XL CDS and XB genome using blast (based on bit score)
 ```
 module load nixpkgs/16.09 gcc/7.3.0 'blast+/2.10.1' 
@@ -97,7 +108,20 @@ sed -i "s/minus/-/g" XLlongCDS_to_XBgenome_plotter.txt
 
 *** the XLlongCDS_to_XBgenome.txt file has the coordinates for each XL CDS gt 200 bp and the XB genome and also the XL annotation information
 
-# Extracting XL L and S subgenomes from XENLA_10.1_genome.dict and blast trop to each XL subgenome
+
+
+
+
+
+
+
+
+
+
+
+# xt to xlL and xlS
+
+## Extracting XL L and S subgenomes from XENLA_10.1_genome.dict and blast trop to each XL subgenome
 
 First generate a XL genome with only the L (or S) subgenome
 ```
@@ -185,29 +209,41 @@ If the script is called "2023_makeblastdb.sh" then it can be executed like this:
 Get best alignment between XT CDS and XL L-subgenome using blast (based on bit score)
 ```
 module load nixpkgs/16.09 gcc/7.3.0 'blast+/2.10.1' 
-blastn -query XENTR_10.0_Xenbase_longest_CDSonly_names_gt200.fasta -db ../2021_XL_v10_refgenome/XENLA_10.1_genome_Lsubgenomeonly_blastable -outfmt 6 | sort -k1,1 -k12,12nr -k11,11n | sort -u -k1,1 --merge > XTlongCDS_to_XL_Lsubgenome_bestbitscore.blastn
+blastn -query XENTR_10.0_Xenbase_longest_CDSonly_names_gt200.fasta -db ../laevis_genome/XENLA_10.1_genome_Lsubgenomeonly_blastable -outfmt "6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore sstrand" | sort -k1,1 -k12,12nr -k11,11n | sort -u -k1,1 --merge > XTlongCDS_to_XL_Lsubgenome_bestbitscore.blastn
 ```
 Get best alignment between XT CDS and XL S-subgenome using blast (based on bit score)
 ```
 module load nixpkgs/16.09 gcc/7.3.0 'blast+/2.10.1' 
-blastn -query XENTR_10.0_Xenbase_longest_CDSonly_names_gt200.fasta -db ../2021_XL_v10_refgenome/XENLA_10.1_genome_Ssubgenomeonly_blastable -outfmt 6 | sort -k1,1 -k12,12nr -k11,11n | sort -u -k1,1 --merge > XTlongCDS_to_XL_Ssubgenome_bestbitscore.blastn
+blastn -query XENTR_10.0_Xenbase_longest_CDSonly_names_gt200.fasta -db ../laevis_genome/XENLA_10.1_genome_Ssubgenomeonly_blastable -outfmt "6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore sstrand" | sort -k1,1 -k12,12nr -k11,11n | sort -u -k1,1 --merge > XTlongCDS_to_XL_Ssubgenome_bestbitscore.blastn
 ```
 
-Use sed to replace double colon with a tab so that the XT coordinates are in a separate column (Importnat: you need to insert a tab using "Ctrl-V tab" in the command below before the '/g' part. 
+Use sed to replace double colon with a tab so that the XT coordinates are in a separate column (Importnat: you need to insert a tab using "Ctrl-V tab" or "\t" in the command below before the '/g' part. 
 
 It will not work if you just copy and paste this command):
 ```
-sed -i 's/\:\:/    /g' XTlongCDS_to_XL_Lsubgenome_bestbitscore.blastn
-sed -i 's/\:\:/    /g' XTlongCDS_to_XL_Ssubgenome_bestbitscore.blastn
+sed -i 's/\:\:/\t/g' XTlongCDS_to_XL_Lsubgenome_bestbitscore.blastn
+sed -i 's/\:\:/\t/g' XTlongCDS_to_XL_Ssubgenome_bestbitscore.blastn
 ```
 Now get this column plus the XL coordinates
 ```
-cut -f1,2,3,10,11 XTlongCDS_to_XL_Lsubgenome_bestbitscore.blastn > XTlongCDS_to_XL_Lsubgenome.txt
-cut -f1,2,3,10,11 XTlongCDS_to_XL_Ssubgenome_bestbitscore.blastn > XTlongCDS_to_XL_Ssubgenome.txt
+cut -f1,2,3,10,11,14 XTlongCDS_to_XL_Lsubgenome_bestbitscore.blastn > XTlongCDS_to_XL_Lsubgenome.txt
+cut -f1,2,3,10,11,14 XTlongCDS_to_XL_Ssubgenome_bestbitscore.blastn > XTlongCDS_to_XL_Ssubgenome.txt
 ```
 *** the XTlongCDS_to_XL_Lgenome.txt and the XTlongCDS_to_XL_Sgenome.txt files have the coordinates for each XT CDS gt 200 bp and each XL subgenome and also the XT annotation information
 
-# Extracting XB L and S subgenomes from Xbo.v1_chrs_and_concatscafs.dict and blast trop to each XB subgenome
+
+
+
+
+
+
+
+
+
+
+# xt to xbL and xbS
+
+## Extracting XB L and S subgenomes from Xbo.v1_chrs_and_concatscafs.dict and blast trop to each XB subgenome
 bed file for L subgenome:
 ```
 Chr1L   1       232529967
@@ -356,15 +392,46 @@ sed -i '/Sca*/d' XTlongCDS_to_XB_Ssubgenome_plotter_final_order.txt
 scp knedlo@graham.computecanada.ca:/home/knedlo/projects/rrg-ben/knedlo/gff3_files/XTlongCDS_to_XB_Ssubgenome_plotter_final_order.txt knedlo@graham.computecanada.ca:/home/knedlo/projects/rrg-ben/knedlo/gff3_files/XTlongCDS_to_XB_Lsubgenome_plotter_final_order.txt .
 ```
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Chromosome Length file = file that contains all chromosome ID, chromosome length, and species ID.
 ```
 cut -f2,3 XENTR_10.0_genome_scafconcat.dict > chromosome_length
 vi chromosome_length
 ```
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### below not used
-
-
 
 * for XL
 ```
