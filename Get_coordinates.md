@@ -227,7 +227,7 @@ sed -i 's/\:\:/\t/g' XTlongCDS_to_XL_Ssubgenome_bestbitscore.blastn
 Now get this column plus the XL coordinates
 ```
 cut -f2,3,10,11,14 XTlongCDS_to_XL_Lsubgenome_bestbitscore.blastn > XTlongCDS_to_XL_Lsubgenome.txt
-cut -f2,3,10,11,14 XTlongCDS_to_XL_Ssubgenome_besq  t`bitscore.blastn > XTlongCDS_to_XL_Ssubgenome.txt
+cut -f2,3,10,11,14 XTlongCDS_to_XL_Ssubgenome_bestbitscore.blastn > XTlongCDS_to_XL_Ssubgenome.txt
 ```
 
 *** the XTlongCDS_to_XL_Lgenome.txt and the XTlongCDS_to_XL_Sgenome.txt files have the coordinates for each XT CDS gt 200 bp and each XL subgenome and also the XT annotation information
@@ -492,6 +492,6 @@ vi chromosome_length
 ```
 module load nixpkgs/16.09 gcc/7.3.0 'blast+/2.10.1'
 
-blastn -query XENTR_10.0_Xenbase_longest_CDSonly_names_gt200.fasta -db ../borealis_genome/Xbo.v1_chrs_and_concatscafs_Lsubgenomeonly_blastable -outfmt "6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore sstrand" | sort -k1,1 -k12,12nr -k11,11n | sort -u -k1,1 --merge > XTlongCDS_to_XB_Lsubgenome_bestbitscore.blastn
-blastn -query XENTR_10.0_Xenbase_longest_CDSonly_names_gt200.fasta -db ../borealis_genome/Xbo.v1_chrs_and_concatscafs_Ssubgenomeonly.blastable -outfmt "6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore sstrand" | sort -k1,1 -k12,12nr -k11,11n | sort -u -k1,1 --merge > XTlongCDS_to_XB_Ssubgenome_bestbitscore.blastn
+blastn -query XENLA_10.1_Xenbase_longest_CDSonly_namesII_gt200II.fasta -db ../borealis_genome/Xbo.v1_chrs_and_concatscafs_Lsubgenomeonly_blastable -outfmt "6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore sstrand" | sort -k1,1 -k12,12nr -k11,11n | sort -u -k1,1 --merge > XLlongCDS_to_XB_Lsubgenome_bestbitscore.blastn
+blastn -query XENLA_10.1_Xenbase_longest_CDSonly_namesII_gt200II.fasta -db ../borealis_genome/Xbo.v1_chrs_and_concatscafs_Ssubgenomeonly.blastable -outfmt "6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore sstrand" | sort -k1,1 -k12,12nr -k11,11n | sort -u -k1,1 --merge > XLlongCDS_to_XB_Ssubgenome_bestbitscore.blastn
 ```
