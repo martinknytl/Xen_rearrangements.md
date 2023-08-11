@@ -512,7 +512,7 @@ cut -f2,3,10,11,14 XLlongCDS_to_XB_Ssubgenome_bestbitscore.blastn > XLlongCDS_to
 sed -i 's/-/    /g' XLlongCDS_to_XB_Lsubgenome.txt | sed -i 's/-/       /g' XLlongCDS_to_XB_Ssubgenome.txt
 sed -i 's/\:/   /g' XLlongCDS_to_XB_Lsubgenome.txt | sed -i 's/\:/      /g' XLlongCDS_to_XB_Ssubgenome.txt
 sed -i "s/$/    X.borealis_L/" XLlongCDS_to_XB_Lsubgenome.txt | sed -i "s/$/    X.borealis_S/" XLlongCDS_to_XB_Ssubgenome.txt
-sed -i "s/$/    X.laevis/" XLlongCDS_to_XB_Lsubgenome.txt | sed -i "s/$/      X.laevis/" XLlongCDS_to_XB_Ssubgenome.txt
+sed -i "s/$/    X.laevis_L/" XLlongCDS_to_XB_Lsubgenome.txt | sed -i "s/$/      X.laevis_S/" XLlongCDS_to_XB_Ssubgenome.txt
 sed -i "s/plus/+/g" XLlongCDS_to_XB_Lsubgenome.txt | sed -i "s/plus/+/g" XLlongCDS_to_XB_Ssubgenome.txt
 sed -i "s/minus/-/g" XLlongCDS_to_XB_Lsubgenome.txt | sed -i "s/minus/-/g" XLlongCDS_to_XB_Ssubgenome.txt
 ```
@@ -539,6 +539,7 @@ awk -F $'\t' ' { if ($5 > $6) {t = $5; $5 = $6; $6 = t; print; } } ' OFS=$'\t' X
 awk -F $'\t' ' { if ($5 < $6) {print; } } ' OFS=$'\t' XTlongCDS_to_XB_Lsubgenome_plotter.txt  > XTlongCDS_to_XB_Lsubgenome_plotter_nonswap.txt
 awk '{print}' XTlongCDS_to_XB_Lsubgenome_plotter_nonswap.txt XTlongCDS_to_XB_Lsubgenome_plotter_swap.txt > XTlongCDS_to_XB_Lsubgenome_plotter_final.txt
 awk -F $'\t' ' {print $4, $5, $6, $1, $2, $3, $7, $8, $9} ' OFS=$'\t' XTlongCDS_to_XB_Lsubgenome_plotter_final.txt > XTlongCDS_to_XB_Lsubgenome_plotter_final_order.txt
+sed '/1S\|2S\|3S\|4S\|5S\|6S\|7S\|8S\|9_10S/d' XLlongCDS_to_XB_Lsubgenome_final_order.txt > XLlongCDS_to_XB_Lsubgenome_final_order_deleted_Ssubgenome.txt
 ```
 
 For the S subgenome:
@@ -551,6 +552,7 @@ awk -F $'\t' ' { if ($5 < $6) {print; } } ' OFS=$'\t' XLlongCDS_to_XB_Ssubgenome
 awk '{print}' XLlongCDS_to_XB_Ssubgenome_nonswap.txt XLlongCDS_to_XB_Ssubgenome_swap.txt > XLlongCDS_to_XB_Ssubgenome_final.txt
 awk -F $'\t' ' {print $4, $5, $6, $1, $2, $3, $7, $8, $9} ' OFS=$'\t' XLlongCDS_to_XB_Ssubgenome_final.txt > XLlongCDS_to_XB_Ssubgenome_final_order.txt
 sed -i '/Sca*/d' XTlongCDS_to_XB_Ssubgenome_plotter_final_order.txt
+sed '/1L\|2L\|3L\|4L\|5L\|6L\|7L\|8L\|9_10L/d' XLlongCDS_to_XB_Ssubgenome_final_order.txt > XLlongCDS_to_XB_Ssubgenome_final_order_deleted_Lsubgenome.txt
 ```
 ```
 scp knedlo@graham.computecanada.ca:/home/knedlo/projects/rrg-ben/knedlo/gff3_files/XTlongCDS_to_XB_Ssubgenome_plotter_final_order.txt knedlo@graham.computecanada.ca:/home/knedlo/projects/rrg-ben/knedlo/gff3_files/XTlongCDS_to_XB_Lsubgenome_plotter_final_order.txt .
