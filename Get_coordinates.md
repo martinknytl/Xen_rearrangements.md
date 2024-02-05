@@ -554,6 +554,10 @@ awk -F $'\t' ' {print $4, $5, $6, $1, $2, $3, $7, $8, $9} ' OFS=$'\t' XLlongCDS_
 sed -i '/Sca*/d' XTlongCDS_to_XB_Ssubgenome_plotter_final_order.txt
 sed '/1L\|2L\|3L\|4L\|5L\|6L\|7L\|8L\|9_10L/d' XLlongCDS_to_XB_Ssubgenome_final_order.txt > XLlongCDS_to_XB_Ssubgenome_final_order_deleted_Lsubgenome.txt
 ```
+For trop as a reference:
+```
+awk -F $'\t' ' {print $4, $5, $6, $1, $2, $3, $7, $8, $9} ' OFS=$'\t' XTlongCDS_to_XB_Ssubgenome_plotter_final_order.txt > XTlongCDS_to_XB_Ssubgenome_plotter_final_order_trop_reference.txt
+```
 ```
 scp knedlo@graham.computecanada.ca:/home/knedlo/projects/rrg-ben/knedlo/gff3_files/XTlongCDS_to_XB_Ssubgenome_plotter_final_order.txt knedlo@graham.computecanada.ca:/home/knedlo/projects/rrg-ben/knedlo/gff3_files/XTlongCDS_to_XB_Lsubgenome_plotter_final_order.txt .
 ```
