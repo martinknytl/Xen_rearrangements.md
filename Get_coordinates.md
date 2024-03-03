@@ -561,9 +561,10 @@ awk -F $'\t' ' {print $4, $5, $6, $1, $2, $3, $7, $9, $8} ' OFS=$'\t' XTlongCDS_
 
 For trop as a reference for borealis paper:
 ```
-awk -F $'\t' ' {print $4, $5, $6, $1, $2, $3, $7, $9, $8} ' OFS=$'\t' XTlongCDS_to_XL_Ssubgenome_final_order.txt > XTlongCDS_to_XL_Ssubgenome_final_order_trop_reference.txt
 awk -F $'\t' ' {print $4, $5, $6, $1, $2, $3, $7, $9, $8} ' OFS=$'\t' XTlongCDS_to_XL_Lsubgenome_final_order.txt > XTlongCDS_to_XL_Lsubgenome_final_order_trop_reference.txt
+awk -F $'\t' ' {print $4, $5, $6, $1, $2, $3, $7, $9, $8} ' OFS=$'\t' XTlongCDS_to_XL_Ssubgenome_final_order.txt > XTlongCDS_to_XL_Ssubgenome_final_order_trop_reference.txt
 awk -F $'\t' ' {print $4, $5, $6, $1, $2, $3, $7, $9, $8} ' OFS=$'\t' XTlongCDS_to_XB_Lsubgenome_plotter_final_order.txt > XTlongCDS_to_XB_Lsubgenome_plotter_final_order_trop_reference.txt
+awk -F $'\t' ' {print $4, $5, $6, $1, $2, $3, $7, $9, $8} ' OFS=$'\t' XTlongCDS_to_XB_Ssubgenome_plotter_final_order.txt > XTlongCDS_to_XB_Ssubgenome_plotter_final_order_trop_reference.txt
 ```
 ```
 scp knedlo@graham.computecanada.ca:/home/knedlo/projects/rrg-ben/knedlo/gff3_files/XTlongCDS_to_XB_Ssubgenome_plotter_final_order.txt knedlo@graham.computecanada.ca:/home/knedlo/projects/rrg-ben/knedlo/gff3_files/XTlongCDS_to_XB_Lsubgenome_plotter_final_order.txt .
