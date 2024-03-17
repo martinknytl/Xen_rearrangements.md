@@ -578,12 +578,6 @@ awk -F $'\t' ' {print $4, $5, $6, $1, $2, $3, $7, $9, $8} ' OFS=$'\t' XTlongCDS_
 sed -i '/Sca*/d' XTlongCDS_to_XB_Lsubgenome_plotter_final_order_trop_reference.txt
 ```
 
-# For XBL as a reference
-```
-awk -F $'\t' ' {print $4, $5, $6, $1, $2, $3, $7, $9, $8} ' OFS=$'\t' XLlongCDS_to_XB_Lsubgenome_final_order_deleted_Ssubgenome.txt > XLlongCDS_to_XB_Lsubgenome_final_order_deleted_Ssubgenome_XLL_reference.txt
-
-
-
 ```
 scp knedlo@graham.computecanada.ca:/home/knedlo/projects/rrg-ben/knedlo/gff3_files/XTlongCDS_to_XB_Ssubgenome_plotter_final_order.txt knedlo@graham.computecanada.ca:/home/knedlo/projects/rrg-ben/knedlo/gff3_files/XTlongCDS_to_XB_Lsubgenome_plotter_final_order.txt .
 ```
