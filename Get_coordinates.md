@@ -535,11 +535,13 @@ sed -i 's/Chr9/9/g' XLlongCDS_to_XB_Lsubgenome.txt
 sed -i 's/Chr10/10/g' XLlongCDS_to_XB_Lsubgenome.txt
 ```
 ```
-awk -F $'\t' ' { if ($5 > $6) {t = $5; $5 = $6; $6 = t; print; } } ' OFS=$'\t' XTlongCDS_to_XB_Lsubgenome_plotter.txt  > XTlongCDS_to_XB_Lsubgenome_plotter_swap.txt
-awk -F $'\t' ' { if ($5 < $6) {print; } } ' OFS=$'\t' XTlongCDS_to_XB_Lsubgenome_plotter.txt  > XTlongCDS_to_XB_Lsubgenome_plotter_nonswap.txt
-awk '{print}' XTlongCDS_to_XB_Lsubgenome_plotter_nonswap.txt XTlongCDS_to_XB_Lsubgenome_plotter_swap.txt > XTlongCDS_to_XB_Lsubgenome_plotter_final.txt
-awk -F $'\t' ' {print $4, $5, $6, $1, $2, $3, $7, $8, $9} ' OFS=$'\t' XTlongCDS_to_XB_Lsubgenome_plotter_final.txt > XTlongCDS_to_XB_Lsubgenome_plotter_final_order.txt
+awk -F $'\t' ' { if ($5 > $6) {t = $5; $5 = $6; $6 = t; print; } } ' OFS=$'\t' XLlongCDS_to_XB_Lsubgenome.txt  > XLlongCDS_to_XB_Lsubgenome_swap.txt
+awk -F $'\t' ' { if ($5 < $6) {print; } } ' OFS=$'\t' XLlongCDS_to_XB_Lsubgenome.txt  > XLlongCDS_to_XB_Lsubgenome_nonswap.txt
+awk '{print}' XLlongCDS_to_XB_Lsubgenome_nonswap.txt XLlongCDS_to_XB_Lsubgenome_swap.txt > XLlongCDS_to_XB_Lsubgenome_final.txt
+awk -F $'\t' ' {print $4, $5, $6, $1, $2, $3, $7, $8, $9} ' OFS=$'\t' XLlongCDS_to_XB_Lsubgenome_final.txt > XLlongCDS_to_XB_Lsubgenome_final_order.txt
+sed -i '/Sca*/d' XLlongCDS_to_XB_Lsubgenome_final_order.txt
 sed '/1S\|2S\|3S\|4S\|5S\|6S\|7S\|8S\|9_10S/d' XLlongCDS_to_XB_Lsubgenome_final_order.txt > XLlongCDS_to_XB_Lsubgenome_final_order_deleted_Ssubgenome.txt
+
 ```
 
 For the S subgenome:
@@ -551,7 +553,7 @@ awk -F $'\t' ' { if ($5 > $6) {t = $5; $5 = $6; $6 = t; print; } } ' OFS=$'\t' X
 awk -F $'\t' ' { if ($5 < $6) {print; } } ' OFS=$'\t' XLlongCDS_to_XB_Ssubgenome.txt  > XLlongCDS_to_XB_Ssubgenome_nonswap.txt
 awk '{print}' XLlongCDS_to_XB_Ssubgenome_nonswap.txt XLlongCDS_to_XB_Ssubgenome_swap.txt > XLlongCDS_to_XB_Ssubgenome_final.txt
 awk -F $'\t' ' {print $4, $5, $6, $1, $2, $3, $7, $8, $9} ' OFS=$'\t' XLlongCDS_to_XB_Ssubgenome_final.txt > XLlongCDS_to_XB_Ssubgenome_final_order.txt
-sed -i '/Sca*/d' XTlongCDS_to_XB_Ssubgenome_plotter_final_order.txt
+sed -i '/Sca*/d' XLlongCDS_to_XB_Ssubgenome_final_order.txt
 sed '/1L\|2L\|3L\|4L\|5L\|6L\|7L\|8L\|9_10L/d' XLlongCDS_to_XB_Ssubgenome_final_order.txt > XLlongCDS_to_XB_Ssubgenome_final_order_deleted_Lsubgenome.txt
 ```
 For trop as a reference for GRD picture:
