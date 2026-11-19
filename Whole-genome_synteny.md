@@ -600,3 +600,10 @@ blastn -query XENLA_10.1_Xenbase_longest_CDSonly_namesII_gt200II_noL.fasta -db .
 ```
 sed -i 's/\:\:/ /g' XL_Ssubgenome_longCDS_to_XB_Lsubgenome_bestbitscore.blastn
 ```
+
+```
+cut -f2,3,10,11,14 XLlongCDS_to_XB_Lsubgenome_bestbitscore.blastn > XL_Ssubgenome_longCDS_to_XB_Lsubgenome.txt
+sed -i 's/-/    /g' XL_Ssubgenome_longCDS_to_XB_Lsubgenome.txt
+sed -i 's/\:/   /g' XL_Ssubgenome_longCDS_to_XB_Lsubgenome.txt
+sed -i "s/$/    X.borealis_L/" XL_Ssubgenome_longCDS_to_XB_Lsubgenome.txt
+sed -i "s/$/    X.laevis_S/" XL_Ssubgenome_longCDS_to_XB_Lsubgenome.txt
