@@ -622,6 +622,7 @@ sed -i 's/Chr7/7/g' XL_Ssubgenome_longCDS_to_XB_Lsubgenome.txt
 sed -i 's/Chr8/8/g' XL_Ssubgenome_longCDS_to_XB_Lsubgenome.txt
 sed -i 's/Chr9/9/g' XL_Ssubgenome_longCDS_to_XB_Lsubgenome.txt
 sed -i 's/Chr10/10/g' XL_Ssubgenome_longCDS_to_XB_Lsubgenome.txt
+sed -i -E 's/[ \t]+/\t/g' XL_Ssubgenome_longCDS_to_XB_Lsubgenome.txt
 ```
 
 ```
