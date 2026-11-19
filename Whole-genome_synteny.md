@@ -607,3 +607,18 @@ sed -i 's/-/    /g' XL_Ssubgenome_longCDS_to_XB_Lsubgenome.txt
 sed -i 's/\:/   /g' XL_Ssubgenome_longCDS_to_XB_Lsubgenome.txt
 sed -i "s/$/    X.borealis_L/" XL_Ssubgenome_longCDS_to_XB_Lsubgenome.txt
 sed -i "s/$/    X.laevis_S/" XL_Ssubgenome_longCDS_to_XB_Lsubgenome.txt
+sed -i "s/plus/+/g" XL_Ssubgenome_longCDS_to_XB_Lsubgenome.txt
+sed -i "s/minus/-/g" XL_Ssubgenome_longCDS_to_XB_Lsubgenome.txt
+
+sed -i 's/Chr1/1/g' XL_Ssubgenome_longCDS_to_XB_Lsubgenome.txt
+sed -i 's/Chr2/2/g' XL_Ssubgenome_longCDS_to_XB_Lsubgenome.txt
+sed -i 's/Chr3/3/g' XL_Ssubgenome_longCDS_to_XB_Lsubgenome.txt
+sed -i 's/Chr4/4/g' XL_Ssubgenome_longCDS_to_XB_Lsubgenome.txt
+sed -i 's/Chr5/5/g' XL_Ssubgenome_longCDS_to_XB_Lsubgenome.txt
+sed -i 's/Chr6/6/g' XL_Ssubgenome_longCDS_to_XB_Lsubgenome.txt
+sed -i 's/Chr7/7/g' XL_Ssubgenome_longCDS_to_XB_Lsubgenome.txt
+sed -i 's/Chr8/8/g' XL_Ssubgenome_longCDS_to_XB_Lsubgenome.txt
+sed -i 's/Chr9/9/g' XL_Ssubgenome_longCDS_to_XB_Lsubgenome.txt
+sed -i 's/Chr10/10/g' XL_Ssubgenome_longCDS_to_XB_Lsubgenome.txt
+
+
