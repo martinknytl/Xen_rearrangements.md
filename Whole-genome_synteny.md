@@ -609,7 +609,9 @@ sed -i "s/$/    X.borealis_L/" XL_Ssubgenome_longCDS_to_XB_Lsubgenome.txt
 sed -i "s/$/    X.laevis_S/" XL_Ssubgenome_longCDS_to_XB_Lsubgenome.txt
 sed -i "s/plus/+/g" XL_Ssubgenome_longCDS_to_XB_Lsubgenome.txt
 sed -i "s/minus/-/g" XL_Ssubgenome_longCDS_to_XB_Lsubgenome.txt
+```
 
+```
 sed -i 's/Chr1/1/g' XL_Ssubgenome_longCDS_to_XB_Lsubgenome.txt
 sed -i 's/Chr2/2/g' XL_Ssubgenome_longCDS_to_XB_Lsubgenome.txt
 sed -i 's/Chr3/3/g' XL_Ssubgenome_longCDS_to_XB_Lsubgenome.txt
@@ -620,5 +622,13 @@ sed -i 's/Chr7/7/g' XL_Ssubgenome_longCDS_to_XB_Lsubgenome.txt
 sed -i 's/Chr8/8/g' XL_Ssubgenome_longCDS_to_XB_Lsubgenome.txt
 sed -i 's/Chr9/9/g' XL_Ssubgenome_longCDS_to_XB_Lsubgenome.txt
 sed -i 's/Chr10/10/g' XL_Ssubgenome_longCDS_to_XB_Lsubgenome.txt
+```
 
+```
+awk -F $'\t' ' { if ($5 > $6) {t = $5; $5 = $6; $6 = t; print; } } ' OFS=$'\t' XL_Ssubgenome_longCDS_to_XB_Lsubgenome.txt > XL_Ssubgenome_longCDS_to_XB_Lsubgenome_swap.txt
+awk -F $'\t' ' { if ($5 < $6) {print; } } ' OFS=$'\t' XL_Ssubgenome_longCDS_to_XB_Lsubgenome.txt  > XL_Ssubgenome_longCDS_to_XB_Lsubgenome_nonswap.txt
+awk '{print}' XL_Ssubgenome_longCDS_to_XB_Lsubgenome_nonswap.txt XL_Ssubgenome_longCDS_to_XB_Lsubgenome_swap.txt > XL_Ssubgenome_longCDS_to_XB_Lsubgenome_final.txt
+awk -F $'\t' ' {print $4, $5, $6, $1, $2, $3, $7, $8, $9} ' OFS=$'\t' XL_Ssubgenome_longCDS_to_XB_Lsubgenome_final.txt > XL_Ssubgenome_longCDS_to_XB_Lsubgenome_final_order.txt
+sed -i '/Sca*/d' XL_Ssubgenome_longCDS_to_XB_Lsubgenome_final_order.txt
+```
 
