@@ -576,17 +576,19 @@ awk -F $'\t' ' {print $4, $5, $6, $1, $2, $3, $7, $9, $8} ' OFS=$'\t' XTlongCDS_
 awk -F $'\t' ' {print $4, $5, $6, $1, $2, $3, $7, $9, $8} ' OFS=$'\t' XTlongCDS_to_XB_Lsubgenome_plotter_final_order.txt > XTlongCDS_to_XB_Lsubgenome_plotter_final_order_trop_reference.txt
 awk -F $'\t' ' {print $4, $5, $6, $1, $2, $3, $7, $9, $8} ' OFS=$'\t' XTlongCDS_to_XB_Ssubgenome_plotter_final_order.txt > XTlongCDS_to_XB_Ssubgenome_plotter_final_order_trop_reference.txt
 sed -i '/Sca*/d' XTlongCDS_to_XB_Lsubgenome_plotter_final_order_trop_reference.txt
-
-
-
-
-
-
-
-
-module load StdEnv/2023 gcc/12.3 'blast+/2.17.0'
 ```
+
 
 ```
 scp knedlo@graham.computecanada.ca:/home/knedlo/projects/rrg-ben/knedlo/gff3_files/XTlongCDS_to_XB_Ssubgenome_plotter_final_order.txt knedlo@graham.computecanada.ca:/home/knedlo/projects/rrg-ben/knedlo/gff3_files/XTlongCDS_to_XB_Lsubgenome_plotter_final_order.txt .
 ```
+
+
+
+
+# Extraction of Xl.S CDSs, which will be mapped to Xb.L
+```
+module load StdEnv/2023 gcc/12.3 'blast+/2.17.0'
+```
+
+databases were madde blastable unde `blast+/2.10.1` modul, so all databases were re-made blastable with the `blast+/2.17.0` modul. 
