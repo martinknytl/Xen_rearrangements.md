@@ -586,12 +586,23 @@ scp knedlo@graham.computecanada.ca:/home/knedlo/projects/rrg-ben/knedlo/gff3_fil
 
 
 
-# Extraction of Xl.S CDSs, which will be mapped to Xb.L
+# xlS to xbL including extraction of XlL CDSs
+
+xlL extraction:
+```
+awk '$1 !~ /L$/' XENLA_10.1_Xenbase_longest_CDSonly_namesII_diffII_gt200IItabII_final.bed > XENLA_10.1_Xenbase_longest_CDSonly_namesII_diffII_gt200IItabII_final_noL.bed
+```
+
+```
+module load bedtools
+bedtools getfasta -name -fi ../laevis_genome/XENLA_10.1_genome.fa -bed XENLA_10.1_Xenbase_longest_CDSonly_namesII_diffII_gt200IItabII_final_noL.bed -fo XENLA_10.1_Xenbase_longest_CDSonly_namesII_gt200II_noL.fasta 
+```
+
 ```
 module load StdEnv/2023 gcc/12.3 'blast+/2.17.0'
 ```
 
-databases were madde blastable unde `blast+/2.10.1` modul, so all databases were re-made blastable with the `blast+/2.17.0` modul. 
+previous databases were madde blastable unde `blast+/2.10.1` modul, so all databases were re-made blastable with the `blast+/2.17.0` modul. 
 
 ```
 blastn -query XENLA_10.1_Xenbase_longest_CDSonly_namesII_gt200II_noL.fasta -db ../borealis_genome/Xbo.v1_chrs_and_concatscafs_Lsubgenomeonly_blastable -outfmt "6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore sstrand" | sort -k1,1 -k12,12nr -k11,11n | sort -u -k1,1 --merge > XL_Ssubgenome_longCDS_to_XB_Lsubgenome_bestbitscore.blastn
