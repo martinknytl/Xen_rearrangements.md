@@ -1,9 +1,6 @@
 # Get coordinates from xb genome that match xl CDS that are greater than 200 (blast xl to xb) and preparation of the xt CDS greater than 200:
 
-Working in this directory on graham:
-```
-/home/ben/projects/rrg-ben/for_martin
-```
+Data were analyzed using Computecanada (Nibi) cluster in Bash
 
 First extract exons from trop and laevis longest gff file:
 ```
